@@ -164,7 +164,5 @@ module lab7 (
 		
 	 );
 	 
-//assign LEDR = {VGA_HS, VGA_VS};
-//assign hex_num_0 = VGA_R;
 
 endmodule

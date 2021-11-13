@@ -68,11 +68,12 @@ void textVGAColorScreenSaver()
 	}
 	for (int x = 0; x < 80; x++)
 	{
-			textVGADrawColorText ("                           ", x,0, 0, 0);
-
+		for (int y = 0; y < 60;y++) {
+			textVGADrawColorText ("                 ", x,0, 0, 0);
+		}
 	}
-	/*int count =0;
-		while (1)
+	int count =0;
+	while (1)
 	{
 		fg = rand() % 16;
 		bg = rand() % 16;
@@ -81,15 +82,12 @@ void textVGAColorScreenSaver()
 			fg = rand() % 16;
 			bg = rand() % 16;
 		}
-		//sprintf(color_string," ttttttt ");
 		sprintf(color_string, "Drawing %s text with %s background", colors[fg].name, colors[bg].name);
 		x = rand() % (80-strlen(color_string));
-		y = rand() % 30;
+		y = rand() % 60;
 		textVGADrawColorText (color_string, x, y, bg, fg);
 		//textVGADrawColorText (color_string, x, y, 15, 0);
 		usleep (100000);
-	}*/
-	if () {
-
 	}
+	textVGADrawColorText ("This is a funcation made for testing", 0,2, 15, 15);
 }

@@ -38,7 +38,7 @@ module vga_text_avl_interface (
 	input  logic AVL_WRITE,					// Avalon-MM Write
 	input  logic AVL_CS,					// Avalon-MM Chip Select
 	input  logic [3:0] AVL_BYTE_EN,			// Avalon-MM Byte Enable
-	input  logic [11:0] AVL_ADDR,			// Avalon-MM Address
+	input  logic [12:0] AVL_ADDR,			// Avalon-MM Address
 	input  logic [31:0] AVL_WRITEDATA,		// Avalon-MM Write Data
 	output logic [31:0] AVL_READDATA,		// Avalon-MM Read Data
 	
@@ -55,9 +55,8 @@ logic [9:0] DrawX, DrawY;
 logic blank, sync, pixel_clk, inCurrent;
 logic [7:0] fontRomOutput;
 logic [31:0] registerOutput, controlOut;
-logic [6:0] posX;
-logic [5:0] posY;
-logic [11:0] VRAMAddress;
+logic [6:0] posX, posY, yAdjust, yAccess;
+logic [12:0] VRAMAddress;
 //wk 2 variables
 logic [15:0] charCurrent;
 logic [3:0] colorRegB, colorRegF, rBack, gBack, bBack, rFore, gFore, bFore;
@@ -70,12 +69,15 @@ vga_controller vgaController(.Clk(CLK),.Reset(RESET),.hs(hs),.vs(vs),.pixel_clk(
 always_comb //access characterss
 begin
 	posX = DrawX[9:3]; //drawX/8
-	posY = DrawY[9:4]; //drawY/16
+	posY = DrawY[9:3]; //drawY/8
+	yAdjust = posY;
+	if (posY[0] == 1'b1)
+		yAdjust = posY - 1;
 	VRAMAddress = posY*80+posX;	 //wk2
 end
 
-ram accessRAM(.address_a(AVL_ADDR[10:0]), 
-.address_b(VRAMAddress[11:1]), //VRAM/2 ever register has 2 chara
+ram accessRAM(.address_a(AVL_ADDR[11:0]), 
+.address_b(VRAMAddress[12:1]), //VRAM/2 ever register has 2 chara
 .byteena_a(AVL_BYTE_EN), 
 .clock(CLK),
 .data_a(AVL_WRITEDATA), .data_b(31'b0), 
@@ -85,9 +87,9 @@ ram accessRAM(.address_a(AVL_ADDR[10:0]),
 
 always_ff @(posedge CLK) 
 begin
-	if (AVL_CS == 1'b1 && AVL_ADDR[11] == 1'b1) 
+	if (AVL_CS == 1'b1 && (AVL_ADDR[11] == 1'b1 && AVL_ADDR[10] == 1'b1)) 
 		begin
-			if (AVL_WRITE == 1'b1) 
+			if (AVL_WRITE == 1'b1 && AVL_ADDR >= 4'h3000) 
 			begin
 				case (AVL_BYTE_EN)
 					4'b1111 : reg_32[AVL_ADDR[4:0]] <= AVL_WRITEDATA;
@@ -115,8 +117,10 @@ begin
 	inCurrent = charCurrent[15]; //MSB invert
 	colorRegB = charCurrent[3:0]; //set background code
 	colorRegF = charCurrent[7:4]; //set forground code
-	
-	
+	if (posY[0] == 1'b1)
+		yAccess = DrawY[3:0] - 1;
+	else 
+		yAccess = DrawY[3:0];
 end
 
 font_rom fontRom(.addr({charCurrent[14:8],DrawY[3:0]}),.data(fontRomOutput));

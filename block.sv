@@ -18,6 +18,8 @@ module  block ( input Reset, frame_clk,
                output [9:0]  BallX, BallY, BallS);
     
     logic [9:0] Ball_X_Pos, Ball_X_Motion, Ball_Y_Pos, Ball_Y_Motion, Ball_Size;
+	 integer counter = 0;
+    assign Ball_Size = 8;  // assigns the value 4 as a 10-digit binary number, ie "0000000100"
 	 
     parameter [9:0] Ball_X_Center=320;  // Center position on the X axis
     parameter [9:0] Ball_Y_Center=240;  // Center position on the Y axis
@@ -25,13 +27,13 @@ module  block ( input Reset, frame_clk,
     parameter [9:0] Ball_X_Max=500;     // Rightmost point on the X axis
     parameter [9:0] Ball_Y_Min=50;       // Topmost point on the Y axis
     parameter [9:0] Ball_Y_Max=430;     // Bottommost point on the Y axis
-    parameter [9:0] Ball_X_Step=2;      // Step size on the X axis
-    parameter [9:0] Ball_Y_Step=2;      // Step size on the Y axis
+    parameter [9:0] Ball_X_Step=8;      // Step size on the X axis
+    parameter [9:0] Ball_Y_Step=8;      // Step size on the Y axis
 
-    assign Ball_Size = 8;  // assigns the value 4 as a 10-digit binary number, ie "0000000100"
    
     always_ff @ (posedge Reset or posedge frame_clk )
     begin: Move_Ball
+		  counter+=1;
         if (Reset)  // Asynchronous Reset
         begin 
             Ball_Y_Motion <= 10'd0; //Ball_Y_Step;
@@ -39,8 +41,7 @@ module  block ( input Reset, frame_clk,
 				Ball_Y_Pos <= Ball_Y_Center;
 				Ball_X_Pos <= Ball_X_Center;
         end
-           
-        else 
+        else //if (counter[2:0] == 0) 
         begin 
 				 if ( (Ball_Y_Pos + Ball_Size) >= Ball_Y_Max )  // Ball is at the bottom edge, BOUNCE!
 					  Ball_Y_Motion <= (~ (Ball_Y_Step) + 1'b1);  // 2's complement.
