@@ -158,11 +158,11 @@ logic Reset_h, vssig, blank, sync, VGA_Clk;
 		
 	 );
 
-block u1( .Reset(Reset_h), .frame_clk(VGA_VS),
+/*block u1( .Reset(Reset_h), .frame_clk(VGA_VS),
 					.keycode,
                .BallX(ballxsig), .BallY(ballysig), .BallS(ballsizesig) );
 color_mapper u2(         .BallX(ballxsig), .BallY(ballysig), .DrawX(drawxsig), .DrawY(drawysig), .Ball_size(ballsizesig),
-                        .Red, .Green, .Blue );
+                        .Red, .Green, .Blue );*/
 vga_controller u3(      .Clk( MAX10_CLK1_50),       // 50 MHz clock
                                       .Reset(Reset_h),     // reset signal
                          .hs( VGA_HS),        // Horizontal sync pulse.  Active low

@@ -420,6 +420,7 @@ set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_RO
 set_global_assignment -name PARTITION_COLOR 16764057 -entity DE10_LITE_Default -section_id Top
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_global_assignment -name SYSTEMVERILOG_FILE lab61.sv
 set_global_assignment -name QIP_FILE lab7_2/synthesis/lab7_2.qip
 set_global_assignment -name SYSTEMVERILOG_FILE font_rom.sv
 set_global_assignment -name QIP_FILE ram.qip
@@ -428,7 +429,6 @@ set_global_assignment -name SYSTEMVERILOG_FILE lab7.sv
 set_global_assignment -name QIP_FILE lab62_soc/synthesis/lab62_soc.qip
 set_global_assignment -name SYSTEMVERILOG_FILE VGA_controller.sv
 set_global_assignment -name SYSTEMVERILOG_FILE lab62.sv
-set_global_assignment -name SYSTEMVERILOG_FILE lab61.sv
 set_global_assignment -name SYSTEMVERILOG_FILE HexDriver.sv
 set_global_assignment -name SYSTEMVERILOG_FILE Color_Mapper.sv
 set_global_assignment -name SYSTEMVERILOG_FILE block.sv

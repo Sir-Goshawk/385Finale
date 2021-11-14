@@ -131,7 +131,7 @@ module  block ( input Reset, frame_clk,
     assign BallX = Ball_X_Pos;
    
     assign BallY = Ball_Y_Pos;
-   
+	 
     assign BallS = Ball_Size;
     
 
