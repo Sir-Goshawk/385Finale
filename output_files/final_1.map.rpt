@@ -1,5 +1,5 @@
 Analysis & Synthesis report for final_1
-Sat Nov 13 19:57:00 2021
+Sun Nov 14 18:37:03 2021
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -388,7 +388,7 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sat Nov 13 19:56:59 2021       ;
+; Analysis & Synthesis Status        ; Successful - Sun Nov 14 18:37:03 2021       ;
 ; Quartus Prime Version              ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
 ; Revision Name                      ; final_1                                     ;
 ; Top-level Entity Name              ; lab7                                        ;
@@ -498,17 +498,19 @@ refer to the applicable agreement for further details.
 +----------------------------+-------------+
 ; Processors                 ; Number      ;
 +----------------------------+-------------+
-; Number detected on machine ; 4           ;
-; Maximum allowed            ; 4           ;
+; Number detected on machine ; 12          ;
+; Maximum allowed            ; 6           ;
 ;                            ;             ;
 ; Average used               ; 1.00        ;
-; Maximum used               ; 4           ;
+; Maximum used               ; 6           ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
 ;     Processor 2            ;   0.0%      ;
 ;     Processor 3            ;   0.0%      ;
 ;     Processor 4            ;   0.0%      ;
+;     Processor 5            ;   0.0%      ;
+;     Processor 6            ;   0.0%      ;
 +----------------------------+-------------+
 
 
@@ -517,7 +519,6 @@ refer to the applicable agreement for further details.
 +-----------------------------------------------------------------------------------------------+-----------------+----------------------------------------------+---------------------------------------------------------------------------------------------------------+-------------+
 ; File Name with User-Entered Path                                                              ; Used in Netlist ; File Type                                    ; File Name with Absolute Path                                                                            ; Library     ;
 +-----------------------------------------------------------------------------------------------+-----------------+----------------------------------------------+---------------------------------------------------------------------------------------------------------+-------------+
-; lab61.sv                                                                                      ; yes             ; User SystemVerilog HDL File                  ; D:/finale/lab61.sv                                                                                      ;             ;
 ; lab7_2/synthesis/lab7_2.v                                                                     ; yes             ; User Verilog HDL File                        ; D:/finale/lab7_2/synthesis/lab7_2.v                                                                     ; lab7_2      ;
 ; lab7_2/synthesis/submodules/altera_reset_controller.v                                         ; yes             ; User Verilog HDL File                        ; D:/finale/lab7_2/synthesis/submodules/altera_reset_controller.v                                         ; lab7_2      ;
 ; lab7_2/synthesis/submodules/altera_reset_synchronizer.v                                       ; yes             ; User Verilog HDL File                        ; D:/finale/lab7_2/synthesis/submodules/altera_reset_synchronizer.v                                       ; lab7_2      ;
@@ -577,7 +578,7 @@ refer to the applicable agreement for further details.
 ; font_rom.sv                                                                                   ; yes             ; User SystemVerilog HDL File                  ; D:/finale/font_rom.sv                                                                                   ;             ;
 ; ram.v                                                                                         ; yes             ; User Wizard-Generated File                   ; D:/finale/ram.v                                                                                         ;             ;
 ; lab7.sv                                                                                       ; yes             ; User SystemVerilog HDL File                  ; D:/finale/lab7.sv                                                                                       ;             ;
-; HexDriver.sv                                                                                  ; yes             ; User SystemVerilog HDL File                  ; D:/finale/HexDriver.sv                                                                                  ;             ;
+; hexdriver.sv                                                                                  ; yes             ; Auto-Found SystemVerilog HDL File            ; D:/finale/hexdriver.sv                                                                                  ;             ;
 ; altsyncram.tdf                                                                                ; yes             ; Megafunction                                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/altsyncram.tdf                                   ;             ;
 ; stratix_ram_block.inc                                                                         ; yes             ; Megafunction                                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/stratix_ram_block.inc                            ;             ;
 ; lpm_mux.inc                                                                                   ; yes             ; Megafunction                                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/lpm_mux.inc                                      ;             ;
@@ -9879,7 +9880,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +------------------+--------------+
 ; Partition Name   ; Elapsed Time ;
 +------------------+--------------+
-; Top              ; 00:00:36     ;
+; Top              ; 00:00:31     ;
 ; sld_hub:auto_hub ; 00:00:00     ;
 +------------------+--------------+
 
@@ -9890,12 +9891,10 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
-    Info: Processing started: Sat Nov 13 19:55:10 2021
+    Info: Processing started: Sun Nov 14 18:35:29 2021
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off final_1 -c final_1
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
-Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
-Info (12021): Found 1 design units, including 1 entities, in source file lab61.sv
-    Info (12023): Found entity 1: lab61 File: D:/finale/lab61.sv Line: 11
+Info (20030): Parallel compilation is enabled and will use 6 of the 6 processors detected
 Info (12021): Found 1 design units, including 1 entities, in source file lab7_2/synthesis/lab7_2.v
     Info (12023): Found entity 1: lab7_2 File: D:/finale/lab7_2/synthesis/lab7_2.v Line: 6
 Info (12021): Found 1 design units, including 1 entities, in source file lab7_2/synthesis/submodules/altera_reset_controller.v
@@ -10222,14 +10221,6 @@ Info (12021): Found 1 design units, including 1 entities, in source file lab62_s
     Info (12023): Found entity 1: lab62_soc_hex_digits_pio File: D:/finale/lab62_soc/synthesis/submodules/lab62_soc_hex_digits_pio.v Line: 21
 Info (12021): Found 1 design units, including 1 entities, in source file vga_controller.sv
     Info (12023): Found entity 1: vga_controller File: D:/finale/VGA_controller.sv Line: 25
-Info (12021): Found 1 design units, including 1 entities, in source file lab62.sv
-    Info (12023): Found entity 1: lab62 File: D:/finale/lab62.sv Line: 9
-Info (12021): Found 1 design units, including 1 entities, in source file hexdriver.sv
-    Info (12023): Found entity 1: HexDriver File: D:/finale/HexDriver.sv Line: 1
-Info (12021): Found 1 design units, including 1 entities, in source file color_mapper.sv
-    Info (12023): Found entity 1: color_mapper File: D:/finale/Color_Mapper.sv Line: 16
-Info (12021): Found 1 design units, including 1 entities, in source file block.sv
-    Info (12023): Found entity 1: block File: D:/finale/block.sv Line: 16
 Warning (10236): Verilog HDL Implicit Net warning at lab7.sv(112): created implicit net for "Reset_h" File: D:/finale/lab7.sv Line: 112
 Warning (10037): Verilog HDL or VHDL warning at lab7_2_sdram.v(318): conditional expression evaluates to a constant File: D:/finale/lab7_2/synthesis/submodules/lab7_2_sdram.v Line: 318
 Warning (10037): Verilog HDL or VHDL warning at lab7_2_sdram.v(328): conditional expression evaluates to a constant File: D:/finale/lab7_2/synthesis/submodules/lab7_2_sdram.v Line: 328
@@ -10248,6 +10239,8 @@ Warning (10858): Verilog HDL warning at lab7.sv(68): object hundreds used but ne
 Warning (10030): Net "signs" at lab7.sv(67) has no driver or initial value, using a default initial value '0' File: D:/finale/lab7.sv Line: 67
 Warning (10030): Net "hundreds" at lab7.sv(68) has no driver or initial value, using a default initial value '0' File: D:/finale/lab7.sv Line: 68
 Warning (10034): Output port "LEDR" at lab7.sv(22) has no driver File: D:/finale/lab7.sv Line: 22
+Warning (12125): Using design file hexdriver.sv, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
+    Info (12023): Found entity 1: HexDriver File: D:/finale/hexdriver.sv Line: 1
 Info (12128): Elaborating entity "HexDriver" for hierarchy "HexDriver:hex_driver4" File: D:/finale/lab7.sv Line: 95
 Info (12128): Elaborating entity "lab7_2" for hierarchy "lab7_2:u0" File: D:/finale/lab7.sv Line: 165
 Info (12128): Elaborating entity "vga_text_avl_interface" for hierarchy "lab7_2:u0|vga_text_avl_interface:vga_text_mode_controller_0" File: D:/finale/lab7_2/synthesis/lab7_2.v Line: 157
@@ -10519,7 +10512,7 @@ Info (12128): Elaborating entity "altera_reset_synchronizer" for hierarchy "lab7
 Info (12128): Elaborating entity "altera_reset_controller" for hierarchy "lab7_2:u0|altera_reset_controller:rst_controller_001" File: D:/finale/lab7_2/synthesis/lab7_2.v Line: 602
 Info (12128): Elaborating entity "altera_reset_controller" for hierarchy "lab7_2:u0|altera_reset_controller:rst_controller_002" File: D:/finale/lab7_2/synthesis/lab7_2.v Line: 665
 Info (11170): Starting IP generation for the debug fabric: alt_sld_fab.
-Info (11172): 2021.11.13.19:56:01 Progress: Loading sldb2886bd5/alt_sld_fab_wrapper_hw.tcl
+Info (11172): 2021.11.14.18:36:12 Progress: Loading sldb2886bd5/alt_sld_fab_wrapper_hw.tcl
 Info (11172): Alt_sld_fab.alt_sld_fab: SLD fabric agents which did not specify prefer_host were connected to JTAG
 Info (11172): Alt_sld_fab: Generating alt_sld_fab "alt_sld_fab" for QUARTUS_SYNTH
 Info (11172): Alt_sld_fab: "alt_sld_fab" instantiated alt_sld_fab "alt_sld_fab"
@@ -10892,11 +10885,11 @@ Info (21057): Implemented 6488 device resources after synthesis - the final reso
     Info (21061): Implemented 6165 logic cells
     Info (21064): Implemented 176 RAM segments
     Info (21065): Implemented 1 PLLs
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 360 warnings
-    Info: Peak virtual memory: 5111 megabytes
-    Info: Processing ended: Sat Nov 13 19:57:03 2021
-    Info: Elapsed time: 00:01:53
-    Info: Total CPU time (on all processors): 00:01:40
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 361 warnings
+    Info: Peak virtual memory: 5080 megabytes
+    Info: Processing ended: Sun Nov 14 18:37:07 2021
+    Info: Elapsed time: 00:01:38
+    Info: Total CPU time (on all processors): 00:01:22
 
 
 +------------------------------------------+
