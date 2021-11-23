@@ -25,7 +25,7 @@ static BYTE addr = 1; 				//hard-wired USB address
 const char* const devclasses[] = { " Uninitialized", " HID Keyboard", " HID Mouse", " Mass storage" };
 //the bottom if
 int grid[60][80];
-int colroValue[60][80];
+int colors[60][80];
 
 BYTE GetDriverandReport() {
 	BYTE i;
@@ -200,70 +200,106 @@ void keyInput(int x, int y, int index, int color) {
 				} else if (yChange == 1 && y >=75) {
 					yChange*=-1;
 				} //VGA screen border
-				if (grid[y+yChange][x] == 1){//if bottom pixel is going to be an edge
 					switch(newIndex) {
 					case 0  :
-						setEdge(x,y);
-						setEdge(x,y-1);
-						setEdge(x,y-2);
-						setEdge(x,y-3);//set as edge
+						if (grid[y+yChange][x] == 1){//if bottom pixel is going to be an edge
+							setEdge(x,y);
+							setEdge(x,y-1);
+							setEdge(x,y-2);
+							setEdge(x,y-3);//set as edge
+						}
+					break;
+
+					if (grid[y+yChange][x] == 1){//if bottom pixel is going to be an edge
+						case 1  :
+							if ( grid[y-2][x+1] ==  1|| //if side block is an edge
+								setEdge(x,y);
+								setEdge(x,y-1);
+								setEdge(x,y-2);
+								setEdge(x,y-3);
+								setEdge(x+1,y-3);//set as edge
+							}
 						break;
-					case 1  :
-						setEdge(x,y);
-						setEdge(x,y-1);
-						setEdge(x,y-2);
-						setEdge(x,y-3);
-						setEdge(x+1,y-3);//set as edge
+						case 2  :
+							if (grid[y+1][x+1] ==  1|| //if side block is an edge
+								grid[y+yChange][x] == 1){//if bottom pixel is going to be an edge
+								setEdge(x,y);
+								setEdge(x,y-1);
+								setEdge(x,y-2);
+								setEdge(x,y-3);
+								setEdge(x+1,y);//set as edge
+							}
 						break;
-					case 2  :
-						setEdge(x,y);
-						setEdge(x,y-1);
-						setEdge(x,y-2);
-						setEdge(x,y-3);
-						setEdge(x+1,y);//set as edge
+						case 3  :
+							if (grid[y+1][x+1] ==  1|| //if side block is an edge
+								grid[y+1][x-1] ==  1|| //if side block is an edge
+								grid[y+yChange][x] == 1){//if bottom pixel is going to be an edge
+								setEdge(x,y);
+								setEdge(x,y-1);
+								setEdge(x+1,y);
+								setEdge(x-1,y);//set as edge
+							}
 						break;
-					case 3  :
-						setEdge(x,y);
-						setEdge(x,y-1);
-						setEdge(x+1,y);
-						setEdge(x-1,y);//set as edge
+						case 4  :
+							if (grid[y+1][x+1] ==  1|| //if side block is an edge
+								grid[y+yChange][x] == 1){//if bottom pixel is going to be an edge
+								setEdge(x,y);
+								setEdge(x,y-1);
+								setEdge(x+1,y);
+								setEdge(x+1,y-1);//set as edge
+							}
 						break;
-					case 4  :
-						setEdge(x,y);
-						setEdge(x,y-1);
-						setEdge(x+1,y);
-						setEdge(x+1,y-1);//set as edge
+						case 5  :
+							if (grid[y+1][x+1] ==  1 || //if side block is an edge
+								grid[y][x-1] ==  1 || //if side block is an edge
+								grid[y+yChange][x] == 1){//if bottom pixel is going to be an edge
+								setEdge(x,y);
+								setEdge(x,y-1);
+								setEdge(x-1,y-1);
+								setEdge(x+1,y);//set as edge
+							}
 						break;
-					case 5  :
-						setEdge(x,y);
-						setEdge(x,y-1);
-						setEdge(x-1,y-1);
-						setEdge(x+1,y);//set as edge
-						break;
-					default :
-						setEdge(x,y);
-						setEdge(x,y-1);
-						setEdge(x+1,y-1);
-						setEdge(x-1,y);//set as edge
-				}
-				yChange = 1; //stop
-				xChange = 0;//stop
-				newIndex = rand()%7;
-				newColor = rand()%15+1;
-				x = 40; //reset x and y
-				if (newIndex <= 2) {
-					y = 12;
-				} else {
-					y = 10;
-				}
+						default :
+							if (grid[y+1][x-1] ==  1|| //if side block is an edge
+								grid[y][x+1] ==  1|| //if side block is an edge
+								grid[y+yChange][x] == 1){//if bottom pixel is going to be an edge
+								setEdge(x,y);
+								setEdge(x,y-1);
+								setEdge(x+1,y-1);
+								setEdge(x-1,y);//set as edge
+							}
+					}
+					yChange = 1; //stop
+					xChange = 0;//stop
+					newIndex = rand()%7; //new index
+					newColor = rand()%15+1; //new color
+					x = 40; //reset x
+					if (newIndex <= 2) {
+						y = 12;
+					} else {
+						y = 10;
+					} //reset y
 				}
 				userControlledBlock(x, y, newIndex,0); //remove original location
+				colors[y,x] = 0;
 				x+=xChange; //update X
 				y+=yChange; //update Y
 				if (y > 10) {
 					userControlledBlock(x, y, newIndex, newColor); //add to new location
+					colors[y][x] = newColor;
 				} //else
+				xChange = 0; //reset to 0
 				printf("(%u,%u) - %u ; \n",x,y, grid[y][x]);
+
+			/*	for (int yCheck = 47; yCheck > 9; yCheck--) {
+
+					if (checkRow(yCheck) == 1) {
+						for (int xCheck = 10; xCheck < 68; xCheck++) {
+							clearEdge(xCheck,yCheck);
+						}
+					}
+				} /* //check edge
+
 				setKeycode(kbdbuf.keycode[0]);
 				printSignedHex0(kbdbuf.keycode[0]);
 				printSignedHex1(kbdbuf.keycode[1]);
@@ -329,3 +365,29 @@ void setEdge(int x, int y) {
 	//printf("set at: %u,%u; ",x,y);
 }
 
+void clearEdge(int x, int y) {
+	grid[y][x] = 0;
+	//printf("set at: %u,%u; ",x,y);
+}
+
+
+int checkRow(int y) {
+	for (int xCheck = 10; xCheck < 68; xCheck++) {
+		if (grid[y][xCheck] == 0) {
+			return 1;
+		}
+	}
+	return 0;
+}
+
+void paintScreen() {
+	for (int row = 0; row < 60; row++) {
+		for (int col = 0; col < 80; col++) {
+				VGADrawColorBox(row, col, colors[row][col], 0);
+		}
+	}
+}
+
+void updateBlock() {
+	
+}

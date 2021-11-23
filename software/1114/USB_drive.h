@@ -38,3 +38,6 @@ void setKeycode(WORD keycode);
 
 void keyInput(int x, int y, int index, int color);
 void setEdge(int x, int y);
+void clearEdge(int x, int y);
+int checkRow(int y);
+void paintScreen();
