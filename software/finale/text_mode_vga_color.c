@@ -122,7 +122,7 @@ void userControlledBlock(int x, int y, int index, int color) {
 		   VGADrawColorBox(x,y,color);
 	      break;
 	   case 2  :
-		   VGADrawColorBox(x+1,y-3,color);
+		   VGADrawColorBox(x+1,y,color);
 		   VGADrawColorBox(x,y-3,color);
 		   VGADrawColorBox(x,y-2,color);
 		   VGADrawColorBox(x,y-1,color);
