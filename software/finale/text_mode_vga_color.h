@@ -2,7 +2,7 @@
  *  text_mode_vga.h
  *	Minimal driver for text mode VGA support, ECE 385 Summer 2021 Lab 6
  *  You may wish to extend this driver for your final project/extra credit project
- * 
+ *
  *  Created on: Jul 17, 2021
  *      Author: zuofu
  */

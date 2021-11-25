@@ -26,7 +26,7 @@ int main() {
 		//VGADrawColorBox(68,9+i,15);
 		setColor(36,9+i,15);
 		setColor(47,9+i,15);
-		setEdge(37,9+i);
+		setEdge(35,9+i);
 		setEdge(47,9+i);
 	}
 	userControlledBlockGrid(x, y, 4, 3);

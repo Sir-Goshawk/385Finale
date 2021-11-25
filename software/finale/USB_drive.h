@@ -42,5 +42,5 @@ void clearEdge(int x, int y);
 void setColor(int x, int y, int color);
 int checkRow(int y);
 void paintScreen();
-int userControlledBlockGrid(int x, int y, int index, int color);
+int userControlledBlockGrid(int x, int y, int index/*, int rotate*/, int color);
 int checkEdge(int x, int y, int newIndex, int maxY);

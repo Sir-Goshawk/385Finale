@@ -12,7 +12,6 @@
 #include "usb_kb/usb_ch9.h"
 #include "usb_kb/USB.h"
 
-#define MAX(x, y) (((x) > (y)) ? (x) : (y))
 
 
 extern HID_DEVICE hid_device;
@@ -127,8 +126,7 @@ void printSignedHex1(signed char value) {
 	IOWR_ALTERA_AVALON_PIO_DATA(HEX_DIGITS_PIO_BASE, pio_val);
 }
 
-void setKeycode(WORD keycode)
-{
+void setKeycode(WORD keycode) {
 	IOWR_ALTERA_AVALON_PIO_DATA(0x00000160, keycode);
 }
 
@@ -170,20 +168,20 @@ void keyInput(int x, int y, int index, int color) {
 				//printf("keycodes: ");
 				for (int i = 0; i < 6; i++) {
 					if (kbdbuf.keycode[i] != 0) {
-						printf("%x - ", kbdbuf.keycode[i]);
+						//printf("%x - ", kbdbuf.keycode[i]);
 						if (kbdbuf.keycode[i] == 26) { //W
-							//printf("W %u , %u - %u ;",x,y, grid[y][x])
+							printf("W - ");
 							yChange = -1;
 							xChange = 0;
 						} else if (kbdbuf.keycode[i] == 4) { //A
-							//printf("A %u , %u - %u ;",x,y, grid[y][x]);
+							printf("A - ");
 							xChange = -1;
 						} else if (kbdbuf.keycode[i] == 22) { //S
-							//printf("S %u , %u - %u ;",x,y, grid[y][x])
-							yChange = 1;
+							printf("S - ");
+							yChange = 2;
 							xChange = 0;
 						} else if (kbdbuf.keycode[i] == 7) { //D
-							//printf("D %u , %u - %u ;",x,y, grid[y][x])
+							printf("D - ");
 							xChange = 1;
 						}
 					}
@@ -200,7 +198,7 @@ void keyInput(int x, int y, int index, int color) {
 				} //VGA screen border
 				switch(newIndex) {
 					case 0  :
-						if (grid[y+1][x] == 1){//if bottom pixel is going to be an edge
+						if (grid[y+1][x] == 1) {//if bottom pixel is going to be an edge
 							setEdge(x,y);
 							setEdge(x,y-1);
 							setEdge(x,y-2);
@@ -316,7 +314,8 @@ void keyInput(int x, int y, int index, int color) {
 					newIndex = 4;
 					userControlledBlockGrid(x, y, newIndex, newColor);
 					paintScreen();
-					printf("(%u,%u) - %u ; top: %u \n",x,y, grid[y][x], maxY);
+					yChange = 1;
+					//printf("(%u,%u) - %u ; top: %u \n",x,y, grid[y][x], maxY);
 				} else {
 					printf("' %u + gameOver'",maxY);
 					return;
@@ -333,8 +332,7 @@ void keyInput(int x, int y, int index, int color) {
 				printf("USB Error State\n");
 				//print out string descriptor here
 			}
-		} else //not in USB running state
-		{
+		} else { //not in USB running state
 
 			printf("USB task state: ");
 			printf("%x\n", GetUsbTaskState());
@@ -364,20 +362,47 @@ void setColor(int x, int y, int color) {
 	//printf("set at: %u,%u; ",x,y);
 }
 
-void userControlledBlockGrid(int x, int y, int index, int color) {
+void userControlledBlockGrid(int x, int y, int index/*, int rotate*/, int color) {
 	switch(index) {
 	   case 0  :
-		   colorValue[y-3][x] = color;//VGADrawColorBox(x,y-3,color);
-		   colorValue[y-2][x] = color;//VGADrawColorBox(x,y-2,color);
-		   colorValue[y-1][x] = color;//VGADrawColorBox(x,y-1,color);
-		   colorValue[y][x] = color;//VGADrawColorBox(x,y,color);
-	      break;
+			// if (rotate <= 1) {
+			   colorValue[y-3][x] = color;//VGADrawColorBox(x,y-3,color);
+			   colorValue[y-2][x] = color;//VGADrawColorBox(x,y-2,color);
+			   colorValue[y-1][x] = color;//VGADrawColorBox(x,y-1,color);
+			   colorValue[y][x] = color;//VGADrawColorBox(x,y,color);
+			 //} else {
+				   colorValue[y][x-3] = color;//VGADrawColorBox(x,y-3,color);
+				   colorValue[y][x-2] = color;//VGADrawColorBox(x,y-2,color);
+				   colorValue[y][x-1] = color;//VGADrawColorBox(x,y-1,color);
+				   colorValue[y][x] = color;//VGADrawColorBox(x,y,color);
+			 //}
+		      break;
 	   case 1  :
-		   colorValue[y-3][x+1] = color;//VGADrawColorBox(x+1,y-3,color);
-		   colorValue[y-3][x] = color;//VGADrawColorBox(x,y-3,color);
-		   colorValue[y-2][x] = color;//VGADrawColorBox(x,y-2,color);
-		   colorValue[y-1][x] = color;//VGADrawColorBoxx,y-1,color);
-		   colorValue[y][x] = color;//VGADrawColorBox(x,y,color);
+			// if (rotate == 0) {
+			   colorValue[y-3][x+1] = color;//VGADrawColorBox(x+1,y-3,color);
+			   colorValue[y-3][x] = color;//VGADrawColorBox(x,y-3,color);
+			   colorValue[y-2][x] = color;//VGADrawColorBox(x,y-2,color);
+			   colorValue[y-1][x] = color;//VGADrawColorBoxx,y-1,color);
+			   colorValue[y][x] = color;//VGADrawColorBox(x,y,color);
+			 /*} else if (rotate == 1) {
+			   colorValue[y-1][x-3] = color;//VGADrawColorBox(x+1,y-3,color);
+			   colorValue[y][x-3] = color;//VGADrawColorBox(x,y-3,color);
+			   colorValue[y][x-2] = color;//VGADrawColorBox(x,y-2,color);
+			   colorValue[y][x-1] = color;//VGADrawColorBoxx,y-1,color);
+			   colorValue[y][x] = color;//VGADrawColorBox(x,y,color);
+			 } else if (rotate == 0) {
+			   colorValue[y-3][x] = color;//VGADrawColorBox(x,y-3,color);
+			   colorValue[y-2][x] = color;//VGADrawColorBox(x,y-2,color);
+			   colorValue[y-1][x] = color;//VGADrawColorBoxx,y-1,color);
+			   colorValue[y][x-1] = color;//VGADrawColorBox(x+1,y-3,color);
+			   colorValue[y][x] = color;//VGADrawColorBox(x,y,color);
+			 } else {
+			   colorValue[y+1][x-3] = color;//VGADrawColorBox(x+1,y-3,color);
+			   colorValue[y][x-3] = color;//VGADrawColorBox(x,y-3,color);
+			   colorValue[y][x-2] = color;//VGADrawColorBox(x,y-2,color);
+			   colorValue[y][x-1] = color;//VGADrawColorBoxx,y-1,color);
+			   colorValue[y][x] = color;//VGADrawColorBox(x,y,color);
+			 }*/
 	      break;
 	   case 2  :
 		   colorValue[y-3][x] = color;//VGADrawColorBox(x,y-3,color);
