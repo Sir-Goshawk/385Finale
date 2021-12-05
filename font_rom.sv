@@ -6,8 +6,8 @@ module font_rom ( input [10:0]	addr,
    parameter DATA_WIDTH =  8;
 	logic [ADDR_WIDTH-1:0] addr_reg;
 	logic [10:0] addrAccess;
-				
-	// ROM definition				
+
+	// ROM definition
 	parameter [0:2**ADDR_WIDTH-1][DATA_WIDTH-1:0] ROM = {
         8'b00000000, // 0
         8'b00000000, // 1
@@ -1504,7 +1504,7 @@ module font_rom ( input [10:0]	addr,
         8'b00000000, // d
         8'b00000000, // e
         8'b00000000, // f
-        
+
          // code x58
         8'b00000000, // 0
         8'b00000000, // 1
@@ -2187,14 +2187,14 @@ module font_rom ( input [10:0]	addr,
         8'b00000000  // f
         };
 
-	
+
 	always_ff //access characterss
 	begin
 		addrAccess = addr;
-		if (addr[3:0] > 3'b111)	
-			addrAccess = addr - 3'b111;
+		//if (addr[3:0] <= 3'b111)
+			//addrAccess = addr + 4'b1000;
 	end
-	
+
 	assign data = ROM[addrAccess];
 
-endmodule  
+endmodule

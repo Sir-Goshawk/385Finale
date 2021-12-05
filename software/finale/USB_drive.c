@@ -131,7 +131,7 @@ void setKeycode(WORD keycode) {
 }
 
 void keyInput(int x, int y, int index, int color) {
-	int xChange = 0, yChange = 1, newIndex = 4, newColor = color, maxY = 48;
+	int xChange = 0, yChange = 1, newIndex = index, newColor = color, maxY = 48;
 	BYTE rcode;
 	BOOT_MOUSE_REPORT buf;		//USB mouse report
 	BOOT_KBD_REPORT kbdbuf;
@@ -311,7 +311,6 @@ void keyInput(int x, int y, int index, int color) {
 							break;
 						}
 					}
-					newIndex = 4;
 					userControlledBlockGrid(x, y, newIndex, newColor);
 					paintScreen();
 					yChange = 1;
@@ -362,79 +361,52 @@ void setColor(int x, int y, int color) {
 	//printf("set at: %u,%u; ",x,y);
 }
 
-void userControlledBlockGrid(int x, int y, int index/*, int rotate*/, int color) {
+void userControlledBlockGrid(int x, int y, int index,  int color) {
 	switch(index) {
-	   case 0  :
-			// if (rotate <= 1) {
+		   case 0  :
+				   colorValue[y-3][x] = color;//VGADrawColorBox(x,y-3,color);
+				   colorValue[y-2][x] = color;//VGADrawColorBox(x,y-2,color);
+				   colorValue[y-1][x] = color;//VGADrawColorBox(x,y-1,color);
+				   colorValue[y][x] = color;//VGADrawColorBox(x,y,color);
+			      break;
+		   case 1  :
+				   colorValue[y-3][x+1] = color;//VGADrawColorBox(x+1,y-3,color);
+				   colorValue[y-3][x] = color;//VGADrawColorBox(x,y-3,color);
+				   colorValue[y-2][x] = color;//VGADrawColorBox(x,y-2,color);
+				   colorValue[y-1][x] = color;//VGADrawColorBoxx,y-1,color);
+				   colorValue[y][x] = color;//VGADrawColorBox(x,y,color);
+		      break;
+		   case 2  :
 			   colorValue[y-3][x] = color;//VGADrawColorBox(x,y-3,color);
 			   colorValue[y-2][x] = color;//VGADrawColorBox(x,y-2,color);
 			   colorValue[y-1][x] = color;//VGADrawColorBox(x,y-1,color);
+			   colorValue[y][x+1] = color;//VGADrawColorBox(x+1,y-3,color);
 			   colorValue[y][x] = color;//VGADrawColorBox(x,y,color);
-			 //} else {
-				   colorValue[y][x-3] = color;//VGADrawColorBox(x,y-3,color);
-				   colorValue[y][x-2] = color;//VGADrawColorBox(x,y-2,color);
-				   colorValue[y][x-1] = color;//VGADrawColorBox(x,y-1,color);
-				   colorValue[y][x] = color;//VGADrawColorBox(x,y,color);
-			 //}
 		      break;
-	   case 1  :
-			// if (rotate == 0) {
-			   colorValue[y-3][x+1] = color;//VGADrawColorBox(x+1,y-3,color);
-			   colorValue[y-3][x] = color;//VGADrawColorBox(x,y-3,color);
-			   colorValue[y-2][x] = color;//VGADrawColorBox(x,y-2,color);
-			   colorValue[y-1][x] = color;//VGADrawColorBoxx,y-1,color);
+		   case 3  :
+			   colorValue[y-1][x] = color;//VGADrawColorBox(x,y-1,color);
 			   colorValue[y][x] = color;//VGADrawColorBox(x,y,color);
-			 /*} else if (rotate == 1) {
-			   colorValue[y-1][x-3] = color;//VGADrawColorBox(x+1,y-3,color);
-			   colorValue[y][x-3] = color;//VGADrawColorBox(x,y-3,color);
-			   colorValue[y][x-2] = color;//VGADrawColorBox(x,y-2,color);
-			   colorValue[y][x-1] = color;//VGADrawColorBoxx,y-1,color);
+			   colorValue[y][x-1] = color;//VGADrawColorBox(x-1,y,color);
+			   colorValue[y][x+1] = color;//VGADrawColorBox(x+1,y,color);
+		      break;
+		   case 4  :
+			   colorValue[y][x+1] = color;//VGADrawColorBox(x+1,y,color);
+			   colorValue[y-1][x+1] = color;//VGADrawColorBox(x+1,y-1,color);
+			   colorValue[y-1][x] = color;//VGADrawColorBox(x,y-1,color);
 			   colorValue[y][x] = color;//VGADrawColorBox(x,y,color);
-			 } else if (rotate == 0) {
-			   colorValue[y-3][x] = color;//VGADrawColorBox(x,y-3,color);
-			   colorValue[y-2][x] = color;//VGADrawColorBox(x,y-2,color);
-			   colorValue[y-1][x] = color;//VGADrawColorBoxx,y-1,color);
-			   colorValue[y][x-1] = color;//VGADrawColorBox(x+1,y-3,color);
+		      break;
+		   case 5  :
+			   colorValue[y][x+1] = color;//VGADrawColorBox(x+1,y,color);
+			   colorValue[y-1][x] = color;//VGADrawColorBox(x,y-1,color);
+			   colorValue[y-1][x-1] = color;//VGADrawColorBox(x-1,y-1,color);
 			   colorValue[y][x] = color;//VGADrawColorBox(x,y,color);
-			 } else {
-			   colorValue[y+1][x-3] = color;//VGADrawColorBox(x+1,y-3,color);
-			   colorValue[y][x-3] = color;//VGADrawColorBox(x,y-3,color);
-			   colorValue[y][x-2] = color;//VGADrawColorBox(x,y-2,color);
-			   colorValue[y][x-1] = color;//VGADrawColorBoxx,y-1,color);
+		      break;
+		   default :
+			   colorValue[y-1][x] = color;//VGADrawColorBox(x,y-1,color);
+			   colorValue[y-1][x+1] = color;//VGADrawColorBox(x+1,y-1,color);
+			   colorValue[y][x+1] = color;//VGADrawColorBox(x+1,y,color);
 			   colorValue[y][x] = color;//VGADrawColorBox(x,y,color);
-			 }*/
-	      break;
-	   case 2  :
-		   colorValue[y-3][x] = color;//VGADrawColorBox(x,y-3,color);
-		   colorValue[y-2][x] = color;//VGADrawColorBox(x,y-2,color);
-		   colorValue[y-1][x] = color;//VGADrawColorBox(x,y-1,color);
-		   colorValue[y][x+1] = color;//VGADrawColorBox(x+1,y-3,color);
-		   colorValue[y][x] = color;//VGADrawColorBox(x,y,color);
-	      break;
-	   case 3  :
-		   colorValue[y-1][x] = color;//VGADrawColorBox(x,y-1,color);
-		   colorValue[y][x] = color;//VGADrawColorBox(x,y,color);
-		   colorValue[y][x-1] = color;//VGADrawColorBox(x-1,y,color);
-		   colorValue[y][x+1] = color;//VGADrawColorBox(x+1,y,color);
-	      break;
-	   case 4  :
-		   colorValue[y][x+1] = color;//VGADrawColorBox(x+1,y,color);
-		   colorValue[y-1][x+1] = color;//VGADrawColorBox(x+1,y-1,color);
-		   colorValue[y-1][x] = color;//VGADrawColorBox(x,y-1,color);
-		   colorValue[y][x] = color;//VGADrawColorBox(x,y,color);
-	      break;
-	   case 5  :
-		   colorValue[y][x+1] = color;//VGADrawColorBox(x+1,y,color);
-		   colorValue[y-1][x] = color;//VGADrawColorBox(x,y-1,color);
-		   colorValue[y-1][x-1] = color;//VGADrawColorBox(x-1,y-1,color);
-		   colorValue[y][x] = color;//VGADrawColorBox(x,y,color);
-	      break;
-	   default :
-		   colorValue[y-1][x] = color;//VGADrawColorBox(x,y-1,color);
-		   colorValue[y-1][x+1] = color;//VGADrawColorBox(x+1,y-1,color);
-		   colorValue[y][x+1] = color;//VGADrawColorBox(x+1,y,color);
-		   colorValue[y][x] = color;//VGADrawColorBox(x,y,color);
-	}
+		}
 }
 
 int checkRow(int y) {
@@ -466,124 +438,3 @@ void paintScreen() {
 		}
 	}
 }
-/*
-int changeBlock(int x, int y, int newIndex, int newColor, int maxY) {
-	switch(newIndex) {
-		case 0  :
-			if (grid[y+1][x] == 1){//if bottom pixel is going to be an edge
-				setEdge(x,y);
-				setEdge(x,y-1);
-				setEdge(x,y-2);
-				setEdge(x,y-3);//set as edge
-				newIndex = rand()%7;
-				newColor = rand()%15+1;
-				y = 14;
-				x = 40;
-				maxY-=2;
-			}
-			break;
-		case 1  :
-		if (grid[y-2][x+1] ==  1|| //if side block is an edge
-			grid[y+1][x] == 1){//if bottom pixel is going to be an edge
-			setEdge(x,y);
-			setEdge(x,y-1);
-			setEdge(x,y-2);
-			setEdge(x,y-3);
-			setEdge(x+1,y-3);//set as edge
-			newIndex = rand()%7;
-			newColor = rand()%15+1;
-			y = 14;
-			x = 40;
-			maxY-=2;
-		}
-			break;
-		case 2  :
-			if (grid[y+1][x+1] ==  1|| //if side block is an edge
-				grid[y+1][x] == 1){//if bottom pixel is going to be an edge
-				setEdge(x,y);
-				setEdge(x,y-1);
-				setEdge(x,y-2);
-				setEdge(x,y-3);
-				setEdge(x+1,y);//set as edge
-				newIndex = rand()%7;
-				newColor = rand()%15+1;
-				y = 14;
-				x = 40;
-				maxY-=2;
-			}
-			break;
-		case 3  :
-			if (grid[y+1][x+1] ==  1|| //if side block is an edge
-				grid[y+1][x-1] ==  1|| //if side block is an edge
-				grid[y+1][x] == 1){//if bottom pixel is going to be an edge
-				setEdge(x,y);
-				setEdge(x,y-1);
-				setEdge(x+1,y);
-				setEdge(x-1,y);//set as edge
-				newIndex = rand()%7;
-				newColor = rand()%15+1;
-				y = 11;
-				x = 40;
-				maxY-=4;
-			}
-			break;
-		case 4  :
-			if (grid[y+1][x+1] ==  1|| //if side block is an edge
-				grid[y+1][x] == 1){//if bottom pixel is going to be an edge
-				setEdge(x,y);
-				setEdge(x,y-1);
-				setEdge(x+1,y);
-				setEdge(x+1,y-1);//set as edge
-				newIndex = rand()%7;
-				newColor = rand()%15+1;
-				y = 11;
-				x = 40;
-				maxY-=4;
-			}
-			break;
-		case 5  :
-			if (grid[y+1][x+1] ==  1 || //if side block is an edge
-				grid[y][x-1] ==  1 || //if side block is an edge
-				grid[y+1][x] == 1){//if bottom pixel is going to be an edge
-				setEdge(x,y);
-				setEdge(x,y-1);
-				setEdge(x-1,y-1);
-				setEdge(x+1,y);//set as edge
-				newIndex = rand()%7;
-				newColor = rand()%15+1;
-				y = 11;
-				x = 40;
-				maxY-=4;
-			}
-			break;
-		default :
-			if (grid[y+1][x-1] ==  1|| //if side block is an edge
-				grid[y][x+1] ==  1|| //if side block is an edge
-				grid[y+1][x] == 1){//if bottom pixel is going to be an edge
-				setEdge(x,y);
-				setEdge(x,y-1);
-				setEdge(x+1,y-1);
-				setEdge(x-1,y);//set as edge
-				newIndex = rand()%7;
-				newColor = rand()%15+1;
-				y = 11;
-				x = 40;
-				maxY-=4;
-			}
-		}
-	userControlledBlock(x, y, newIndex,0); //remove original location
-	userControlledBlockGrid(x, y, newIndex,0);
-	x+=1; //update X
-	y+=1; //update Y
-	/*
-	if (maxY > 10) {
-		xChange = 0;
-		userControlledBlock(x, y, newIndex, newColor); //add to new location
-		userControlledBlockGrid(x, y, newIndex, newColor);
-		printf("(%u,%u) - %u ; top: %u \n",x,y, grid[y][x], maxY);
-	} else {
-		printf("' %u + gameOver'",maxY);
-		return 1;
-	}
-}
-*/

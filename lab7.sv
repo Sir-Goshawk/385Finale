@@ -63,7 +63,7 @@ module lab7 (
 //  REG/WIRE declarations
 //=======================================================
 	logic SPI0_CS_N, SPI0_SCLK, SPI0_MISO, SPI0_MOSI, USB_GPX, USB_IRQ, USB_RST;
-	logic [3:0] hex_num_4, hex_num_3, hex_num_1, hex_num_0; //4 bit input hex digits
+	logic [3:0] hex_num_5, hex_num_4, hex_num_3, hex_num_2, hex_num_1, hex_num_0; //4 bit input hex digits
 	logic [1:0] signs;
 	logic [1:0] hundreds;
 	logic [7:0] keycode;
@@ -92,30 +92,42 @@ module lab7 (
 	assign USB_GPX = 1'b0;
 	
 	//HEX drivers to convert numbers to HEX output
+	HexDriver hex_driver5 (hex_num_5, HEX5[6:0]);
+	assign HEX5[7] = 1'b1;
+	
 	HexDriver hex_driver4 (hex_num_4, HEX4[6:0]);
 	assign HEX4[7] = 1'b1;
 	
 	HexDriver hex_driver3 (hex_num_3, HEX3[6:0]);
 	assign HEX3[7] = 1'b1;
 	
-	HexDriver hex_driver1 (hex_num_1, HEX1[6:0]);
+	HexDriver hex_driver2 (fps, HEX2[6:0]);
+	assign HEX2[7] = 1'b1;
+	
+	HexDriver hex_driver1 (SW[0], HEX1[6:0]);
 	assign HEX1[7] = 1'b1;
 	
-	HexDriver hex_driver0 (hex_num_0, HEX0[6:0]);
+	HexDriver hex_driver0 (fps[3:0], HEX0[6:0]);
 	assign HEX0[7] = 1'b1;
 	
 	//fill in the hundreds digit as well as the negative sign
-	assign HEX5 = {1'b1, ~signs[1], 3'b111, ~hundreds[1], ~hundreds[1], 1'b1};
-	assign HEX2 = {1'b1, ~signs[0], 3'b111, ~hundreds[0], ~hundreds[0], 1'b1};
+	//assign HEX5 = {1'b1, ~signs[1], 3'b111, ~hundreds[1], ~hundreds[1], 1'b1};
+	//assign HEX2 = {1'b1, ~signs[0], 3'b111, ~hundreds[0], ~hundreds[0], 1'b1};
 	
 	
 	assign {Reset_h}=~ (KEY[0]); 
 
 	//assign signs = 2'b00;
-	//assign hex_num_4 = 4'h4;
-	//assign hex_num_3 = 4'h3;
-	//assign hex_num_1 = 4'h1;
-	//assign hex_num_0 = 4'h0;
+	assign hex_num_5 = 4'h8;
+	assign hex_num_4 = 4'h8;
+	assign hex_num_3 = 4'h8;
+	assign hex_num_2 = 4'h8;
+	assign hex_num_1 = 4'h8;
+	assign hex_num_0 = 4'h8;
+	
+	
+	logic [7:0] fps, clock_reset;
+	timer clock_timer(.clock_reset(clock_reset), .clk(MAX10_CLK1_50), .fps(fps));
 	
 	//remember to rename the SOC as necessary
 	lab7_2 u0 (  //for week 7.1 
@@ -160,7 +172,11 @@ module lab7 (
 		.vga_port_green (VGA_G),
 		.vga_port_blue (VGA_B),
 		.vga_port_hs (VGA_HS),
-		.vga_port_vs (VGA_VS)
+		.vga_port_vs (VGA_VS), 
+		
+		//timer
+		.fps_export(fps),
+		.timer_reset_export(clock_reset)
 		
 	 );
 	 

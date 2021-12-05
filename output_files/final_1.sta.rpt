@@ -1,5 +1,5 @@
 Timing Analyzer report for final_1
-Sun Nov 14 18:37:57 2021
+Fri Nov 26 22:50:05 2021
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -91,16 +91,17 @@ refer to the applicable agreement for further details.
 +----------------------------+-------------+
 ; Processors                 ; Number      ;
 +----------------------------+-------------+
-; Number detected on machine ; 12          ;
-; Maximum allowed            ; 6           ;
+; Number detected on machine ; 4           ;
+; Maximum allowed            ; 4           ;
 ;                            ;             ;
-; Average used               ; 1.66        ;
-; Maximum used               ; 6           ;
+; Average used               ; 1.80        ;
+; Maximum used               ; 4           ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;  13.1%      ;
-;     Processors 3-6         ;  13.1%      ;
+;     Processor 2            ;  26.6%      ;
+;     Processor 3            ;  26.5%      ;
+;     Processor 4            ;  26.5%      ;
 +----------------------------+-------------+
 
 
@@ -109,12 +110,12 @@ refer to the applicable agreement for further details.
 +-----------------------------------------------------------------------------+--------+--------------------------+
 ; SDC File Path                                                               ; Status ; Read at                  ;
 +-----------------------------------------------------------------------------+--------+--------------------------+
-; lab7_2/synthesis/submodules/altera_reset_controller.sdc                     ; OK     ; Sun Nov 14 18:37:49 2021 ;
-; lab7_2/synthesis/submodules/altera_avalon_st_handshake_clock_crosser.sdc    ; OK     ; Sun Nov 14 18:37:49 2021 ;
-; lab7_2/synthesis/submodules/lab7_2_nios2_gen2_0_cpu.sdc                     ; OK     ; Sun Nov 14 18:37:50 2021 ;
-; lab62_soc/synthesis/submodules/altera_reset_controller.sdc                  ; OK     ; Sun Nov 14 18:37:50 2021 ;
-; lab62_soc/synthesis/submodules/altera_avalon_st_handshake_clock_crosser.sdc ; OK     ; Sun Nov 14 18:37:50 2021 ;
-; lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc               ; OK     ; Sun Nov 14 18:37:50 2021 ;
+; lab7_2/synthesis/submodules/altera_reset_controller.sdc                     ; OK     ; Fri Nov 26 22:49:57 2021 ;
+; lab7_2/synthesis/submodules/altera_avalon_st_handshake_clock_crosser.sdc    ; OK     ; Fri Nov 26 22:49:57 2021 ;
+; lab7_2/synthesis/submodules/lab7_2_nios2_gen2_0_cpu.sdc                     ; OK     ; Fri Nov 26 22:49:57 2021 ;
+; lab62_soc/synthesis/submodules/altera_reset_controller.sdc                  ; OK     ; Fri Nov 26 22:49:57 2021 ;
+; lab62_soc/synthesis/submodules/altera_avalon_st_handshake_clock_crosser.sdc ; OK     ; Fri Nov 26 22:49:57 2021 ;
+; lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc               ; OK     ; Fri Nov 26 22:49:57 2021 ;
 +-----------------------------------------------------------------------------+--------+--------------------------+
 
 
@@ -132,7 +133,7 @@ refer to the applicable agreement for further details.
 +------------+-----------------+---------------------+------+
 ; Fmax       ; Restricted Fmax ; Clock Name          ; Note ;
 +------------+-----------------+---------------------+------+
-; 114.97 MHz ; 114.97 MHz      ; altera_reserved_tck ;      ;
+; 118.12 MHz ; 118.12 MHz      ; altera_reserved_tck ;      ;
 +------------+-----------------+---------------------+------+
 This panel reports FMAX for every clock in the design, regardless of the user-specified clock periods.  FMAX is only computed for paths where the source and destination registers or ports are driven by the same clock.  Paths of different clocks, including generated clocks, are ignored.  For paths between a clock and its inversion, FMAX is computed as if the rising and falling edges are scaled along with FMAX, such that the duty cycle (in terms of a percentage) is maintained. Altera recommends that you always use clock constraints and other slack reports for sign-off analysis.
 
@@ -142,7 +143,7 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +---------------------+--------+---------------+
 ; Clock               ; Slack  ; End Point TNS ;
 +---------------------+--------+---------------+
-; altera_reserved_tck ; 45.651 ; 0.000         ;
+; altera_reserved_tck ; 45.767 ; 0.000         ;
 +---------------------+--------+---------------+
 
 
@@ -160,7 +161,7 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +---------------------+--------+---------------+
 ; Clock               ; Slack  ; End Point TNS ;
 +---------------------+--------+---------------+
-; altera_reserved_tck ; 47.434 ; 0.000         ;
+; altera_reserved_tck ; 46.445 ; 0.000         ;
 +---------------------+--------+---------------+
 
 
@@ -169,7 +170,7 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +---------------------+-------+---------------+
 ; Clock               ; Slack ; End Point TNS ;
 +---------------------+-------+---------------+
-; altera_reserved_tck ; 0.975 ; 0.000         ;
+; altera_reserved_tck ; 1.261 ; 0.000         ;
 +---------------------+-------+---------------+
 
 
@@ -178,7 +179,7 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +---------------------+--------+--------------------+
 ; Clock               ; Slack  ; End Point TNS      ;
 +---------------------+--------+--------------------+
-; altera_reserved_tck ; 49.625 ; 0.000              ;
+; altera_reserved_tck ; 49.626 ; 0.000              ;
 +---------------------+--------+--------------------+
 
 
@@ -191,7 +192,7 @@ Typical MTBF of Design is 1e+09 years or 3.15e+16 seconds.
 Number of Synchronizer Chains Found: 3
 Shortest Synchronizer Chain: 2 Registers
 Fraction of Chains for which MTBFs Could Not be Calculated: 0.333
-Worst Case Available Settling Time: 197.146 ns
+Worst Case Available Settling Time: 196.737 ns
 
 Worst-Case MTBF values are calculated based on the worst-case silicon characteristics, with worst-case operating conditions.
   - Under worst-case conditions, an increase of 100ps in available settling time will increase MTBF values by a factor of 1.8
@@ -200,13 +201,13 @@ Typical MTBF values are calculated based on the nominal silicon characteristics,
 
 
 
-+----------------------------------------------------------+
-; Slow 1200mV 0C Model Fmax Summary                        ;
-+-----------+-----------------+---------------------+------+
-; Fmax      ; Restricted Fmax ; Clock Name          ; Note ;
-+-----------+-----------------+---------------------+------+
-; 123.3 MHz ; 123.3 MHz       ; altera_reserved_tck ;      ;
-+-----------+-----------------+---------------------+------+
++-----------------------------------------------------------+
+; Slow 1200mV 0C Model Fmax Summary                         ;
++------------+-----------------+---------------------+------+
+; Fmax       ; Restricted Fmax ; Clock Name          ; Note ;
++------------+-----------------+---------------------+------+
+; 127.39 MHz ; 127.39 MHz      ; altera_reserved_tck ;      ;
++------------+-----------------+---------------------+------+
 This panel reports FMAX for every clock in the design, regardless of the user-specified clock periods.  FMAX is only computed for paths where the source and destination registers or ports are driven by the same clock.  Paths of different clocks, including generated clocks, are ignored.  For paths between a clock and its inversion, FMAX is computed as if the rising and falling edges are scaled along with FMAX, such that the duty cycle (in terms of a percentage) is maintained. Altera recommends that you always use clock constraints and other slack reports for sign-off analysis.
 
 
@@ -215,7 +216,7 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +---------------------+--------+---------------+
 ; Clock               ; Slack  ; End Point TNS ;
 +---------------------+--------+---------------+
-; altera_reserved_tck ; 45.945 ; 0.000         ;
+; altera_reserved_tck ; 46.075 ; 0.000         ;
 +---------------------+--------+---------------+
 
 
@@ -233,7 +234,7 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +---------------------+--------+---------------+
 ; Clock               ; Slack  ; End Point TNS ;
 +---------------------+--------+---------------+
-; altera_reserved_tck ; 47.617 ; 0.000         ;
+; altera_reserved_tck ; 46.715 ; 0.000         ;
 +---------------------+--------+---------------+
 
 
@@ -242,7 +243,7 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +---------------------+-------+---------------+
 ; Clock               ; Slack ; End Point TNS ;
 +---------------------+-------+---------------+
-; altera_reserved_tck ; 0.897 ; 0.000         ;
+; altera_reserved_tck ; 1.164 ; 0.000         ;
 +---------------------+-------+---------------+
 
 
@@ -251,7 +252,7 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +---------------------+--------+-------------------+
 ; Clock               ; Slack  ; End Point TNS     ;
 +---------------------+--------+-------------------+
-; altera_reserved_tck ; 49.648 ; 0.000             ;
+; altera_reserved_tck ; 49.649 ; 0.000             ;
 +---------------------+--------+-------------------+
 
 
@@ -264,7 +265,7 @@ Typical MTBF of Design is 1e+09 years or 3.15e+16 seconds.
 Number of Synchronizer Chains Found: 3
 Shortest Synchronizer Chain: 2 Registers
 Fraction of Chains for which MTBFs Could Not be Calculated: 0.333
-Worst Case Available Settling Time: 197.405 ns
+Worst Case Available Settling Time: 197.040 ns
 
 Worst-Case MTBF values are calculated based on the worst-case silicon characteristics, with worst-case operating conditions.
   - Under worst-case conditions, an increase of 100ps in available settling time will increase MTBF values by a factor of 1.8
@@ -278,7 +279,7 @@ Typical MTBF values are calculated based on the nominal silicon characteristics,
 +---------------------+--------+---------------+
 ; Clock               ; Slack  ; End Point TNS ;
 +---------------------+--------+---------------+
-; altera_reserved_tck ; 48.381 ; 0.000         ;
+; altera_reserved_tck ; 48.452 ; 0.000         ;
 +---------------------+--------+---------------+
 
 
@@ -296,7 +297,7 @@ Typical MTBF values are calculated based on the nominal silicon characteristics,
 +---------------------+--------+---------------+
 ; Clock               ; Slack  ; End Point TNS ;
 +---------------------+--------+---------------+
-; altera_reserved_tck ; 49.075 ; 0.000         ;
+; altera_reserved_tck ; 48.551 ; 0.000         ;
 +---------------------+--------+---------------+
 
 
@@ -305,7 +306,7 @@ Typical MTBF values are calculated based on the nominal silicon characteristics,
 +---------------------+-------+---------------+
 ; Clock               ; Slack ; End Point TNS ;
 +---------------------+-------+---------------+
-; altera_reserved_tck ; 0.425 ; 0.000         ;
+; altera_reserved_tck ; 0.543 ; 0.000         ;
 +---------------------+-------+---------------+
 
 
@@ -327,7 +328,7 @@ Typical MTBF of Design is 1e+09 years or 3.15e+16 seconds.
 Number of Synchronizer Chains Found: 3
 Shortest Synchronizer Chain: 2 Registers
 Fraction of Chains for which MTBFs Could Not be Calculated: 0.333
-Worst Case Available Settling Time: 198.813 ns
+Worst Case Available Settling Time: 198.626 ns
 
 Worst-Case MTBF values are calculated based on the worst-case silicon characteristics, with worst-case operating conditions.
   - Under worst-case conditions, an increase of 100ps in available settling time will increase MTBF values by a factor of 1.8
@@ -341,8 +342,8 @@ Typical MTBF values are calculated based on the nominal silicon characteristics,
 +----------------------+--------+-------+----------+---------+---------------------+
 ; Clock                ; Setup  ; Hold  ; Recovery ; Removal ; Minimum Pulse Width ;
 +----------------------+--------+-------+----------+---------+---------------------+
-; Worst-case Slack     ; 45.651 ; 0.147 ; 47.434   ; 0.425   ; 49.420              ;
-;  altera_reserved_tck ; 45.651 ; 0.147 ; 47.434   ; 0.425   ; 49.420              ;
+; Worst-case Slack     ; 45.767 ; 0.147 ; 46.445   ; 0.543   ; 49.420              ;
+;  altera_reserved_tck ; 45.767 ; 0.147 ; 46.445   ; 0.543   ; 49.420              ;
 ; Design-wide TNS      ; 0.0    ; 0.0   ; 0.0      ; 0.0     ; 0.0                 ;
 ;  altera_reserved_tck ; 0.000  ; 0.000 ; 0.000    ; 0.000   ; 0.000               ;
 +----------------------+--------+-------+----------+---------+---------------------+
@@ -1232,7 +1233,7 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 Info: *******************************************************************
 Info: Running Quartus Prime Timing Analyzer
     Info: Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
-    Info: Processing started: Sun Nov 14 18:37:46 2021
+    Info: Processing started: Fri Nov 26 22:49:40 2021
 Info: Command: quartus_sta final_1 -c final_1
 Info: qsta_default_script.tcl version: #1
 Warning (20013): Ignored 207 assignments for entity "DE10_LITE_Default" -- entity does not exist in design
@@ -1473,7 +1474,7 @@ Warning (20013): Ignored 26 assignments for entity "lab62_soc_timer_0" -- entity
 Warning (20013): Ignored 23 assignments for entity "lab62_soc_usb_gpx" -- entity does not exist in design
 Warning (20013): Ignored 22 assignments for entity "lab62_soc_usb_rst" -- entity does not exist in design
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
-Info (20030): Parallel compilation is enabled and will use 6 of the 6 processors detected
+Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
 Info (21077): Low junction temperature is 0 degrees C
 Info (21077): High junction temperature is 85 degrees C
 Info (332164): Evaluating HDL-embedded SDC commands
@@ -1515,45 +1516,45 @@ Info (332104): Reading SDC File: 'lab7_2/synthesis/submodules/lab7_2_nios2_gen2_
 Info (332104): Reading SDC File: 'lab62_soc/synthesis/submodules/altera_reset_controller.sdc'
 Info (332104): Reading SDC File: 'lab62_soc/synthesis/submodules/altera_avalon_st_handshake_clock_crosser.sdc'
 Info (332104): Reading SDC File: 'lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc'
-Warning (332174): Ignored filter at lab62_soc_nios2_gen2_0_cpu.sdc(46): *lab62_soc_nios2_gen2_0_cpu:*|lab62_soc_nios2_gen2_0_cpu_nios2_oci:the_lab62_soc_nios2_gen2_0_cpu_nios2_oci|lab62_soc_nios2_gen2_0_cpu_nios2_oci_break:the_lab62_soc_nios2_gen2_0_cpu_nios2_oci_break|break_readreg* could not be matched with a keeper File: D:/finale/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 46
-Warning (332174): Ignored filter at lab62_soc_nios2_gen2_0_cpu.sdc(46): *lab62_soc_nios2_gen2_0_cpu:*|lab62_soc_nios2_gen2_0_cpu_nios2_oci:the_lab62_soc_nios2_gen2_0_cpu_nios2_oci|lab62_soc_nios2_gen2_0_cpu_debug_slave_wrapper:the_lab62_soc_nios2_gen2_0_cpu_debug_slave_wrapper|lab62_soc_nios2_gen2_0_cpu_debug_slave_tck:the_lab62_soc_nios2_gen2_0_cpu_debug_slave_tck|*sr* could not be matched with a keeper File: D:/finale/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 46
-Warning (332049): Ignored set_false_path at lab62_soc_nios2_gen2_0_cpu.sdc(46): Argument <from> is an empty collection File: D:/finale/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 46
-    Info (332050): set_false_path -from [get_keepers *$lab62_soc_nios2_gen2_0_cpu_oci_break_path|break_readreg*] -to [get_keepers *$lab62_soc_nios2_gen2_0_cpu_jtag_sr*] File: D:/finale/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 46
-Warning (332049): Ignored set_false_path at lab62_soc_nios2_gen2_0_cpu.sdc(46): Argument <to> is an empty collection File: D:/finale/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 46
-Warning (332174): Ignored filter at lab62_soc_nios2_gen2_0_cpu.sdc(47): *lab62_soc_nios2_gen2_0_cpu:*|lab62_soc_nios2_gen2_0_cpu_nios2_oci:the_lab62_soc_nios2_gen2_0_cpu_nios2_oci|lab62_soc_nios2_gen2_0_cpu_nios2_oci_debug:the_lab62_soc_nios2_gen2_0_cpu_nios2_oci_debug|*resetlatch could not be matched with a keeper File: D:/finale/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 47
-Warning (332174): Ignored filter at lab62_soc_nios2_gen2_0_cpu.sdc(47): *lab62_soc_nios2_gen2_0_cpu:*|lab62_soc_nios2_gen2_0_cpu_nios2_oci:the_lab62_soc_nios2_gen2_0_cpu_nios2_oci|lab62_soc_nios2_gen2_0_cpu_debug_slave_wrapper:the_lab62_soc_nios2_gen2_0_cpu_debug_slave_wrapper|lab62_soc_nios2_gen2_0_cpu_debug_slave_tck:the_lab62_soc_nios2_gen2_0_cpu_debug_slave_tck|*sr[33] could not be matched with a keeper File: D:/finale/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 47
-Warning (332049): Ignored set_false_path at lab62_soc_nios2_gen2_0_cpu.sdc(47): Argument <from> is an empty collection File: D:/finale/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 47
-    Info (332050): set_false_path -from [get_keepers *$lab62_soc_nios2_gen2_0_cpu_oci_debug_path|*resetlatch]     -to [get_keepers *$lab62_soc_nios2_gen2_0_cpu_jtag_sr[33]] File: D:/finale/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 47
-Warning (332049): Ignored set_false_path at lab62_soc_nios2_gen2_0_cpu.sdc(47): Argument <to> is an empty collection File: D:/finale/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 47
-Warning (332174): Ignored filter at lab62_soc_nios2_gen2_0_cpu.sdc(48): *lab62_soc_nios2_gen2_0_cpu:*|lab62_soc_nios2_gen2_0_cpu_nios2_oci:the_lab62_soc_nios2_gen2_0_cpu_nios2_oci|lab62_soc_nios2_gen2_0_cpu_nios2_oci_debug:the_lab62_soc_nios2_gen2_0_cpu_nios2_oci_debug|monitor_ready could not be matched with a keeper File: D:/finale/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 48
-Warning (332174): Ignored filter at lab62_soc_nios2_gen2_0_cpu.sdc(48): *lab62_soc_nios2_gen2_0_cpu:*|lab62_soc_nios2_gen2_0_cpu_nios2_oci:the_lab62_soc_nios2_gen2_0_cpu_nios2_oci|lab62_soc_nios2_gen2_0_cpu_debug_slave_wrapper:the_lab62_soc_nios2_gen2_0_cpu_debug_slave_wrapper|lab62_soc_nios2_gen2_0_cpu_debug_slave_tck:the_lab62_soc_nios2_gen2_0_cpu_debug_slave_tck|*sr[0] could not be matched with a keeper File: D:/finale/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 48
-Warning (332049): Ignored set_false_path at lab62_soc_nios2_gen2_0_cpu.sdc(48): Argument <from> is an empty collection File: D:/finale/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 48
-    Info (332050): set_false_path -from [get_keepers *$lab62_soc_nios2_gen2_0_cpu_oci_debug_path|monitor_ready]  -to [get_keepers *$lab62_soc_nios2_gen2_0_cpu_jtag_sr[0]] File: D:/finale/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 48
-Warning (332049): Ignored set_false_path at lab62_soc_nios2_gen2_0_cpu.sdc(48): Argument <to> is an empty collection File: D:/finale/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 48
-Warning (332174): Ignored filter at lab62_soc_nios2_gen2_0_cpu.sdc(49): *lab62_soc_nios2_gen2_0_cpu:*|lab62_soc_nios2_gen2_0_cpu_nios2_oci:the_lab62_soc_nios2_gen2_0_cpu_nios2_oci|lab62_soc_nios2_gen2_0_cpu_nios2_oci_debug:the_lab62_soc_nios2_gen2_0_cpu_nios2_oci_debug|monitor_error could not be matched with a keeper File: D:/finale/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 49
-Warning (332174): Ignored filter at lab62_soc_nios2_gen2_0_cpu.sdc(49): *lab62_soc_nios2_gen2_0_cpu:*|lab62_soc_nios2_gen2_0_cpu_nios2_oci:the_lab62_soc_nios2_gen2_0_cpu_nios2_oci|lab62_soc_nios2_gen2_0_cpu_debug_slave_wrapper:the_lab62_soc_nios2_gen2_0_cpu_debug_slave_wrapper|lab62_soc_nios2_gen2_0_cpu_debug_slave_tck:the_lab62_soc_nios2_gen2_0_cpu_debug_slave_tck|*sr[34] could not be matched with a keeper File: D:/finale/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 49
-Warning (332049): Ignored set_false_path at lab62_soc_nios2_gen2_0_cpu.sdc(49): Argument <from> is an empty collection File: D:/finale/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 49
-    Info (332050): set_false_path -from [get_keepers *$lab62_soc_nios2_gen2_0_cpu_oci_debug_path|monitor_error]  -to [get_keepers *$lab62_soc_nios2_gen2_0_cpu_jtag_sr[34]] File: D:/finale/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 49
-Warning (332049): Ignored set_false_path at lab62_soc_nios2_gen2_0_cpu.sdc(49): Argument <to> is an empty collection File: D:/finale/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 49
-Warning (332174): Ignored filter at lab62_soc_nios2_gen2_0_cpu.sdc(50): *lab62_soc_nios2_gen2_0_cpu:*|lab62_soc_nios2_gen2_0_cpu_nios2_oci:the_lab62_soc_nios2_gen2_0_cpu_nios2_oci|lab62_soc_nios2_gen2_0_cpu_nios2_ocimem:the_lab62_soc_nios2_gen2_0_cpu_nios2_ocimem|*MonDReg* could not be matched with a keeper File: D:/finale/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 50
-Warning (332049): Ignored set_false_path at lab62_soc_nios2_gen2_0_cpu.sdc(50): Argument <from> is an empty collection File: D:/finale/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 50
-    Info (332050): set_false_path -from [get_keepers *$lab62_soc_nios2_gen2_0_cpu_ocimem_path|*MonDReg*] -to [get_keepers *$lab62_soc_nios2_gen2_0_cpu_jtag_sr*] File: D:/finale/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 50
-Warning (332049): Ignored set_false_path at lab62_soc_nios2_gen2_0_cpu.sdc(50): Argument <to> is an empty collection File: D:/finale/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 50
-Warning (332174): Ignored filter at lab62_soc_nios2_gen2_0_cpu.sdc(51): *lab62_soc_nios2_gen2_0_cpu:*|lab62_soc_nios2_gen2_0_cpu_nios2_oci:the_lab62_soc_nios2_gen2_0_cpu_nios2_oci|lab62_soc_nios2_gen2_0_cpu_debug_slave_wrapper:the_lab62_soc_nios2_gen2_0_cpu_debug_slave_wrapper|lab62_soc_nios2_gen2_0_cpu_debug_slave_tck:the_lab62_soc_nios2_gen2_0_cpu_debug_slave_tck|*sr* could not be matched with a clock or keeper or register or port or pin or cell or partition File: D:/finale/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 51
-Warning (332174): Ignored filter at lab62_soc_nios2_gen2_0_cpu.sdc(51): *lab62_soc_nios2_gen2_0_cpu:*|lab62_soc_nios2_gen2_0_cpu_nios2_oci:the_lab62_soc_nios2_gen2_0_cpu_nios2_oci|lab62_soc_nios2_gen2_0_cpu_debug_slave_wrapper:the_lab62_soc_nios2_gen2_0_cpu_debug_slave_wrapper|lab62_soc_nios2_gen2_0_cpu_debug_slave_sysclk:the_lab62_soc_nios2_gen2_0_cpu_debug_slave_sysclk|*jdo* could not be matched with a clock or keeper or register or port or pin or cell or partition File: D:/finale/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 51
-Warning (332049): Ignored set_false_path at lab62_soc_nios2_gen2_0_cpu.sdc(51): Argument <from> is not an object ID File: D:/finale/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 51
-    Info (332050): set_false_path -from *$lab62_soc_nios2_gen2_0_cpu_jtag_sr*    -to *$lab62_soc_nios2_gen2_0_cpu_jtag_sysclk_path|*jdo* File: D:/finale/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 51
-Warning (332049): Ignored set_false_path at lab62_soc_nios2_gen2_0_cpu.sdc(51): Argument <to> is not an object ID File: D:/finale/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 51
-Warning (332174): Ignored filter at lab62_soc_nios2_gen2_0_cpu.sdc(52): *lab62_soc_nios2_gen2_0_cpu:*|lab62_soc_nios2_gen2_0_cpu_nios2_oci:the_lab62_soc_nios2_gen2_0_cpu_nios2_oci|lab62_soc_nios2_gen2_0_cpu_debug_slave_wrapper:the_lab62_soc_nios2_gen2_0_cpu_debug_slave_wrapper|lab62_soc_nios2_gen2_0_cpu_debug_slave_sysclk:the_lab62_soc_nios2_gen2_0_cpu_debug_slave_sysclk|ir* could not be matched with a clock or keeper or register or port or pin or cell or partition File: D:/finale/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 52
-Warning (332049): Ignored set_false_path at lab62_soc_nios2_gen2_0_cpu.sdc(52): Argument <to> is not an object ID File: D:/finale/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 52
-    Info (332050): set_false_path -from sld_hub:*|irf_reg* -to *$lab62_soc_nios2_gen2_0_cpu_jtag_sysclk_path|ir* File: D:/finale/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 52
-Warning (332174): Ignored filter at lab62_soc_nios2_gen2_0_cpu.sdc(53): *lab62_soc_nios2_gen2_0_cpu:*|lab62_soc_nios2_gen2_0_cpu_nios2_oci:the_lab62_soc_nios2_gen2_0_cpu_nios2_oci|lab62_soc_nios2_gen2_0_cpu_nios2_oci_debug:the_lab62_soc_nios2_gen2_0_cpu_nios2_oci_debug|monitor_go could not be matched with a clock or keeper or register or port or pin or cell or partition File: D:/finale/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 53
-Warning (332049): Ignored set_false_path at lab62_soc_nios2_gen2_0_cpu.sdc(53): Argument <to> is not an object ID File: D:/finale/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 53
-    Info (332050): set_false_path -from sld_hub:*|sld_shadow_jsm:shadow_jsm|state[1] -to *$lab62_soc_nios2_gen2_0_cpu_oci_debug_path|monitor_go File: D:/finale/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 53
+Warning (332174): Ignored filter at lab62_soc_nios2_gen2_0_cpu.sdc(46): *lab62_soc_nios2_gen2_0_cpu:*|lab62_soc_nios2_gen2_0_cpu_nios2_oci:the_lab62_soc_nios2_gen2_0_cpu_nios2_oci|lab62_soc_nios2_gen2_0_cpu_nios2_oci_break:the_lab62_soc_nios2_gen2_0_cpu_nios2_oci_break|break_readreg* could not be matched with a keeper File: D:/OneDrive - University of Illinois - Urbana/ECE385 - Digital Systems Labortorary/Finale/Project/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 46
+Warning (332174): Ignored filter at lab62_soc_nios2_gen2_0_cpu.sdc(46): *lab62_soc_nios2_gen2_0_cpu:*|lab62_soc_nios2_gen2_0_cpu_nios2_oci:the_lab62_soc_nios2_gen2_0_cpu_nios2_oci|lab62_soc_nios2_gen2_0_cpu_debug_slave_wrapper:the_lab62_soc_nios2_gen2_0_cpu_debug_slave_wrapper|lab62_soc_nios2_gen2_0_cpu_debug_slave_tck:the_lab62_soc_nios2_gen2_0_cpu_debug_slave_tck|*sr* could not be matched with a keeper File: D:/OneDrive - University of Illinois - Urbana/ECE385 - Digital Systems Labortorary/Finale/Project/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 46
+Warning (332049): Ignored set_false_path at lab62_soc_nios2_gen2_0_cpu.sdc(46): Argument <from> is an empty collection File: D:/OneDrive - University of Illinois - Urbana/ECE385 - Digital Systems Labortorary/Finale/Project/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 46
+    Info (332050): set_false_path -from [get_keepers *$lab62_soc_nios2_gen2_0_cpu_oci_break_path|break_readreg*] -to [get_keepers *$lab62_soc_nios2_gen2_0_cpu_jtag_sr*] File: D:/OneDrive - University of Illinois - Urbana/ECE385 - Digital Systems Labortorary/Finale/Project/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 46
+Warning (332049): Ignored set_false_path at lab62_soc_nios2_gen2_0_cpu.sdc(46): Argument <to> is an empty collection File: D:/OneDrive - University of Illinois - Urbana/ECE385 - Digital Systems Labortorary/Finale/Project/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 46
+Warning (332174): Ignored filter at lab62_soc_nios2_gen2_0_cpu.sdc(47): *lab62_soc_nios2_gen2_0_cpu:*|lab62_soc_nios2_gen2_0_cpu_nios2_oci:the_lab62_soc_nios2_gen2_0_cpu_nios2_oci|lab62_soc_nios2_gen2_0_cpu_nios2_oci_debug:the_lab62_soc_nios2_gen2_0_cpu_nios2_oci_debug|*resetlatch could not be matched with a keeper File: D:/OneDrive - University of Illinois - Urbana/ECE385 - Digital Systems Labortorary/Finale/Project/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 47
+Warning (332174): Ignored filter at lab62_soc_nios2_gen2_0_cpu.sdc(47): *lab62_soc_nios2_gen2_0_cpu:*|lab62_soc_nios2_gen2_0_cpu_nios2_oci:the_lab62_soc_nios2_gen2_0_cpu_nios2_oci|lab62_soc_nios2_gen2_0_cpu_debug_slave_wrapper:the_lab62_soc_nios2_gen2_0_cpu_debug_slave_wrapper|lab62_soc_nios2_gen2_0_cpu_debug_slave_tck:the_lab62_soc_nios2_gen2_0_cpu_debug_slave_tck|*sr[33] could not be matched with a keeper File: D:/OneDrive - University of Illinois - Urbana/ECE385 - Digital Systems Labortorary/Finale/Project/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 47
+Warning (332049): Ignored set_false_path at lab62_soc_nios2_gen2_0_cpu.sdc(47): Argument <from> is an empty collection File: D:/OneDrive - University of Illinois - Urbana/ECE385 - Digital Systems Labortorary/Finale/Project/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 47
+    Info (332050): set_false_path -from [get_keepers *$lab62_soc_nios2_gen2_0_cpu_oci_debug_path|*resetlatch]     -to [get_keepers *$lab62_soc_nios2_gen2_0_cpu_jtag_sr[33]] File: D:/OneDrive - University of Illinois - Urbana/ECE385 - Digital Systems Labortorary/Finale/Project/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 47
+Warning (332049): Ignored set_false_path at lab62_soc_nios2_gen2_0_cpu.sdc(47): Argument <to> is an empty collection File: D:/OneDrive - University of Illinois - Urbana/ECE385 - Digital Systems Labortorary/Finale/Project/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 47
+Warning (332174): Ignored filter at lab62_soc_nios2_gen2_0_cpu.sdc(48): *lab62_soc_nios2_gen2_0_cpu:*|lab62_soc_nios2_gen2_0_cpu_nios2_oci:the_lab62_soc_nios2_gen2_0_cpu_nios2_oci|lab62_soc_nios2_gen2_0_cpu_nios2_oci_debug:the_lab62_soc_nios2_gen2_0_cpu_nios2_oci_debug|monitor_ready could not be matched with a keeper File: D:/OneDrive - University of Illinois - Urbana/ECE385 - Digital Systems Labortorary/Finale/Project/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 48
+Warning (332174): Ignored filter at lab62_soc_nios2_gen2_0_cpu.sdc(48): *lab62_soc_nios2_gen2_0_cpu:*|lab62_soc_nios2_gen2_0_cpu_nios2_oci:the_lab62_soc_nios2_gen2_0_cpu_nios2_oci|lab62_soc_nios2_gen2_0_cpu_debug_slave_wrapper:the_lab62_soc_nios2_gen2_0_cpu_debug_slave_wrapper|lab62_soc_nios2_gen2_0_cpu_debug_slave_tck:the_lab62_soc_nios2_gen2_0_cpu_debug_slave_tck|*sr[0] could not be matched with a keeper File: D:/OneDrive - University of Illinois - Urbana/ECE385 - Digital Systems Labortorary/Finale/Project/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 48
+Warning (332049): Ignored set_false_path at lab62_soc_nios2_gen2_0_cpu.sdc(48): Argument <from> is an empty collection File: D:/OneDrive - University of Illinois - Urbana/ECE385 - Digital Systems Labortorary/Finale/Project/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 48
+    Info (332050): set_false_path -from [get_keepers *$lab62_soc_nios2_gen2_0_cpu_oci_debug_path|monitor_ready]  -to [get_keepers *$lab62_soc_nios2_gen2_0_cpu_jtag_sr[0]] File: D:/OneDrive - University of Illinois - Urbana/ECE385 - Digital Systems Labortorary/Finale/Project/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 48
+Warning (332049): Ignored set_false_path at lab62_soc_nios2_gen2_0_cpu.sdc(48): Argument <to> is an empty collection File: D:/OneDrive - University of Illinois - Urbana/ECE385 - Digital Systems Labortorary/Finale/Project/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 48
+Warning (332174): Ignored filter at lab62_soc_nios2_gen2_0_cpu.sdc(49): *lab62_soc_nios2_gen2_0_cpu:*|lab62_soc_nios2_gen2_0_cpu_nios2_oci:the_lab62_soc_nios2_gen2_0_cpu_nios2_oci|lab62_soc_nios2_gen2_0_cpu_nios2_oci_debug:the_lab62_soc_nios2_gen2_0_cpu_nios2_oci_debug|monitor_error could not be matched with a keeper File: D:/OneDrive - University of Illinois - Urbana/ECE385 - Digital Systems Labortorary/Finale/Project/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 49
+Warning (332174): Ignored filter at lab62_soc_nios2_gen2_0_cpu.sdc(49): *lab62_soc_nios2_gen2_0_cpu:*|lab62_soc_nios2_gen2_0_cpu_nios2_oci:the_lab62_soc_nios2_gen2_0_cpu_nios2_oci|lab62_soc_nios2_gen2_0_cpu_debug_slave_wrapper:the_lab62_soc_nios2_gen2_0_cpu_debug_slave_wrapper|lab62_soc_nios2_gen2_0_cpu_debug_slave_tck:the_lab62_soc_nios2_gen2_0_cpu_debug_slave_tck|*sr[34] could not be matched with a keeper File: D:/OneDrive - University of Illinois - Urbana/ECE385 - Digital Systems Labortorary/Finale/Project/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 49
+Warning (332049): Ignored set_false_path at lab62_soc_nios2_gen2_0_cpu.sdc(49): Argument <from> is an empty collection File: D:/OneDrive - University of Illinois - Urbana/ECE385 - Digital Systems Labortorary/Finale/Project/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 49
+    Info (332050): set_false_path -from [get_keepers *$lab62_soc_nios2_gen2_0_cpu_oci_debug_path|monitor_error]  -to [get_keepers *$lab62_soc_nios2_gen2_0_cpu_jtag_sr[34]] File: D:/OneDrive - University of Illinois - Urbana/ECE385 - Digital Systems Labortorary/Finale/Project/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 49
+Warning (332049): Ignored set_false_path at lab62_soc_nios2_gen2_0_cpu.sdc(49): Argument <to> is an empty collection File: D:/OneDrive - University of Illinois - Urbana/ECE385 - Digital Systems Labortorary/Finale/Project/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 49
+Warning (332174): Ignored filter at lab62_soc_nios2_gen2_0_cpu.sdc(50): *lab62_soc_nios2_gen2_0_cpu:*|lab62_soc_nios2_gen2_0_cpu_nios2_oci:the_lab62_soc_nios2_gen2_0_cpu_nios2_oci|lab62_soc_nios2_gen2_0_cpu_nios2_ocimem:the_lab62_soc_nios2_gen2_0_cpu_nios2_ocimem|*MonDReg* could not be matched with a keeper File: D:/OneDrive - University of Illinois - Urbana/ECE385 - Digital Systems Labortorary/Finale/Project/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 50
+Warning (332049): Ignored set_false_path at lab62_soc_nios2_gen2_0_cpu.sdc(50): Argument <from> is an empty collection File: D:/OneDrive - University of Illinois - Urbana/ECE385 - Digital Systems Labortorary/Finale/Project/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 50
+    Info (332050): set_false_path -from [get_keepers *$lab62_soc_nios2_gen2_0_cpu_ocimem_path|*MonDReg*] -to [get_keepers *$lab62_soc_nios2_gen2_0_cpu_jtag_sr*] File: D:/OneDrive - University of Illinois - Urbana/ECE385 - Digital Systems Labortorary/Finale/Project/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 50
+Warning (332049): Ignored set_false_path at lab62_soc_nios2_gen2_0_cpu.sdc(50): Argument <to> is an empty collection File: D:/OneDrive - University of Illinois - Urbana/ECE385 - Digital Systems Labortorary/Finale/Project/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 50
+Warning (332174): Ignored filter at lab62_soc_nios2_gen2_0_cpu.sdc(51): *lab62_soc_nios2_gen2_0_cpu:*|lab62_soc_nios2_gen2_0_cpu_nios2_oci:the_lab62_soc_nios2_gen2_0_cpu_nios2_oci|lab62_soc_nios2_gen2_0_cpu_debug_slave_wrapper:the_lab62_soc_nios2_gen2_0_cpu_debug_slave_wrapper|lab62_soc_nios2_gen2_0_cpu_debug_slave_tck:the_lab62_soc_nios2_gen2_0_cpu_debug_slave_tck|*sr* could not be matched with a clock or keeper or register or port or pin or cell or partition File: D:/OneDrive - University of Illinois - Urbana/ECE385 - Digital Systems Labortorary/Finale/Project/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 51
+Warning (332174): Ignored filter at lab62_soc_nios2_gen2_0_cpu.sdc(51): *lab62_soc_nios2_gen2_0_cpu:*|lab62_soc_nios2_gen2_0_cpu_nios2_oci:the_lab62_soc_nios2_gen2_0_cpu_nios2_oci|lab62_soc_nios2_gen2_0_cpu_debug_slave_wrapper:the_lab62_soc_nios2_gen2_0_cpu_debug_slave_wrapper|lab62_soc_nios2_gen2_0_cpu_debug_slave_sysclk:the_lab62_soc_nios2_gen2_0_cpu_debug_slave_sysclk|*jdo* could not be matched with a clock or keeper or register or port or pin or cell or partition File: D:/OneDrive - University of Illinois - Urbana/ECE385 - Digital Systems Labortorary/Finale/Project/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 51
+Warning (332049): Ignored set_false_path at lab62_soc_nios2_gen2_0_cpu.sdc(51): Argument <from> is not an object ID File: D:/OneDrive - University of Illinois - Urbana/ECE385 - Digital Systems Labortorary/Finale/Project/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 51
+    Info (332050): set_false_path -from *$lab62_soc_nios2_gen2_0_cpu_jtag_sr*    -to *$lab62_soc_nios2_gen2_0_cpu_jtag_sysclk_path|*jdo* File: D:/OneDrive - University of Illinois - Urbana/ECE385 - Digital Systems Labortorary/Finale/Project/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 51
+Warning (332049): Ignored set_false_path at lab62_soc_nios2_gen2_0_cpu.sdc(51): Argument <to> is not an object ID File: D:/OneDrive - University of Illinois - Urbana/ECE385 - Digital Systems Labortorary/Finale/Project/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 51
+Warning (332174): Ignored filter at lab62_soc_nios2_gen2_0_cpu.sdc(52): *lab62_soc_nios2_gen2_0_cpu:*|lab62_soc_nios2_gen2_0_cpu_nios2_oci:the_lab62_soc_nios2_gen2_0_cpu_nios2_oci|lab62_soc_nios2_gen2_0_cpu_debug_slave_wrapper:the_lab62_soc_nios2_gen2_0_cpu_debug_slave_wrapper|lab62_soc_nios2_gen2_0_cpu_debug_slave_sysclk:the_lab62_soc_nios2_gen2_0_cpu_debug_slave_sysclk|ir* could not be matched with a clock or keeper or register or port or pin or cell or partition File: D:/OneDrive - University of Illinois - Urbana/ECE385 - Digital Systems Labortorary/Finale/Project/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 52
+Warning (332049): Ignored set_false_path at lab62_soc_nios2_gen2_0_cpu.sdc(52): Argument <to> is not an object ID File: D:/OneDrive - University of Illinois - Urbana/ECE385 - Digital Systems Labortorary/Finale/Project/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 52
+    Info (332050): set_false_path -from sld_hub:*|irf_reg* -to *$lab62_soc_nios2_gen2_0_cpu_jtag_sysclk_path|ir* File: D:/OneDrive - University of Illinois - Urbana/ECE385 - Digital Systems Labortorary/Finale/Project/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 52
+Warning (332174): Ignored filter at lab62_soc_nios2_gen2_0_cpu.sdc(53): *lab62_soc_nios2_gen2_0_cpu:*|lab62_soc_nios2_gen2_0_cpu_nios2_oci:the_lab62_soc_nios2_gen2_0_cpu_nios2_oci|lab62_soc_nios2_gen2_0_cpu_nios2_oci_debug:the_lab62_soc_nios2_gen2_0_cpu_nios2_oci_debug|monitor_go could not be matched with a clock or keeper or register or port or pin or cell or partition File: D:/OneDrive - University of Illinois - Urbana/ECE385 - Digital Systems Labortorary/Finale/Project/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 53
+Warning (332049): Ignored set_false_path at lab62_soc_nios2_gen2_0_cpu.sdc(53): Argument <to> is not an object ID File: D:/OneDrive - University of Illinois - Urbana/ECE385 - Digital Systems Labortorary/Finale/Project/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 53
+    Info (332050): set_false_path -from sld_hub:*|sld_shadow_jsm:shadow_jsm|state[1] -to *$lab62_soc_nios2_gen2_0_cpu_oci_debug_path|monitor_go File: D:/OneDrive - University of Illinois - Urbana/ECE385 - Digital Systems Labortorary/Finale/Project/lab62_soc/synthesis/submodules/lab62_soc_nios2_gen2_0_cpu.sdc Line: 53
 Warning (332060): Node: MAX10_CLK1_50 was determined to be a clock but was found without an associated clock assignment.
     Info (13166): Register lab7_2:u0|lab7_2_sdram:sdram|m_addr[0] is being clocked by MAX10_CLK1_50
 Warning (332060): Node: lab7_2:u0|vga_text_avl_interface:vga_text_mode_controller_0|vga_controller:vgaController|clkdiv was determined to be a clock but was found without an associated clock assignment.
-    Info (13166): Register lab7_2:u0|vga_text_avl_interface:vga_text_mode_controller_0|vga_controller:vgaController|vc[3] is being clocked by lab7_2:u0|vga_text_avl_interface:vga_text_mode_controller_0|vga_controller:vgaController|clkdiv
+    Info (13166): Register lab7_2:u0|vga_text_avl_interface:vga_text_mode_controller_0|vga_controller:vgaController|hc[7] is being clocked by lab7_2:u0|vga_text_avl_interface:vga_text_mode_controller_0|vga_controller:vgaController|clkdiv
 Info (332097): The following timing edges are non-unate.  The Timing Analyzer will assume pos-unate behavior for these edges in the clock network.
     Info (332098): Cell: altera_internal_jtag  from: tck  to: tckutap
 Warning (332056): PLL cross checking found inconsistent PLL clock settings:
@@ -1566,26 +1567,26 @@ Critical Warning (332168): The following clock transfers have no clock uncertain
 Info: Found TIMING_ANALYZER_REPORT_SCRIPT_INCLUDE_DEFAULT_ANALYSIS = ON
 Info: Analyzing Slow 1200mV 85C Model
 Info: Can't run Report Timing Closure Recommendations. The current device family is not supported.
-Info (332146): Worst-case setup slack is 45.651
+Info (332146): Worst-case setup slack is 45.767
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    45.651               0.000 altera_reserved_tck 
+    Info (332119):    45.767               0.000 altera_reserved_tck 
 Info (332146): Worst-case hold slack is 0.340
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
     Info (332119):     0.340               0.000 altera_reserved_tck 
-Info (332146): Worst-case recovery slack is 47.434
+Info (332146): Worst-case recovery slack is 46.445
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    47.434               0.000 altera_reserved_tck 
-Info (332146): Worst-case removal slack is 0.975
+    Info (332119):    46.445               0.000 altera_reserved_tck 
+Info (332146): Worst-case removal slack is 1.261
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     0.975               0.000 altera_reserved_tck 
-Info (332146): Worst-case minimum pulse width slack is 49.625
+    Info (332119):     1.261               0.000 altera_reserved_tck 
+Info (332146): Worst-case minimum pulse width slack is 49.626
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    49.625               0.000 altera_reserved_tck 
+    Info (332119):    49.626               0.000 altera_reserved_tck 
 Info (332114): Report Metastability: Found 3 synchronizer chains.
     Info (332114): Worst-Case MTBF of Design is 1e+09 years or 3.15e+16 seconds.
     Info (332114): Typical MTBF of Design is 1e+09 years or 3.15e+16 seconds.
@@ -1593,7 +1594,7 @@ Info (332114): Report Metastability: Found 3 synchronizer chains.
     Info (332114): Number of Synchronizer Chains Found: 3
     Info (332114): Shortest Synchronizer Chain: 2 Registers
     Info (332114): Fraction of Chains for which MTBFs Could Not be Calculated: 0.333
-    Info (332114): Worst Case Available Settling Time: 197.146 ns
+    Info (332114): Worst Case Available Settling Time: 196.737 ns
     Info (332114): 
     Info (332114): Worst-Case MTBF values are calculated based on the worst-case silicon characteristics, with worst-case operating conditions.
     Info (332114):   - Under worst-case conditions, an increase of 100ps in available settling time will increase MTBF values by a factor of 1.8
@@ -1605,7 +1606,7 @@ Info (334004): Delay annotation completed successfully
 Warning (332060): Node: MAX10_CLK1_50 was determined to be a clock but was found without an associated clock assignment.
     Info (13166): Register lab7_2:u0|lab7_2_sdram:sdram|m_addr[0] is being clocked by MAX10_CLK1_50
 Warning (332060): Node: lab7_2:u0|vga_text_avl_interface:vga_text_mode_controller_0|vga_controller:vgaController|clkdiv was determined to be a clock but was found without an associated clock assignment.
-    Info (13166): Register lab7_2:u0|vga_text_avl_interface:vga_text_mode_controller_0|vga_controller:vgaController|vc[3] is being clocked by lab7_2:u0|vga_text_avl_interface:vga_text_mode_controller_0|vga_controller:vgaController|clkdiv
+    Info (13166): Register lab7_2:u0|vga_text_avl_interface:vga_text_mode_controller_0|vga_controller:vgaController|hc[7] is being clocked by lab7_2:u0|vga_text_avl_interface:vga_text_mode_controller_0|vga_controller:vgaController|clkdiv
 Info (332097): The following timing edges are non-unate.  The Timing Analyzer will assume pos-unate behavior for these edges in the clock network.
     Info (332098): Cell: altera_internal_jtag  from: tck  to: tckutap
 Warning (332056): PLL cross checking found inconsistent PLL clock settings:
@@ -1615,26 +1616,26 @@ Critical Warning (332168): The following clock transfers have no clock uncertain
     Critical Warning (332169): From altera_reserved_tck (Rise) to altera_reserved_tck (Rise) (setup and hold)
     Critical Warning (332169): From altera_reserved_tck (Rise) to altera_reserved_tck (Fall) (setup and hold)
     Critical Warning (332169): From altera_reserved_tck (Fall) to altera_reserved_tck (Fall) (setup and hold)
-Info (332146): Worst-case setup slack is 45.945
+Info (332146): Worst-case setup slack is 46.075
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    45.945               0.000 altera_reserved_tck 
+    Info (332119):    46.075               0.000 altera_reserved_tck 
 Info (332146): Worst-case hold slack is 0.305
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
     Info (332119):     0.305               0.000 altera_reserved_tck 
-Info (332146): Worst-case recovery slack is 47.617
+Info (332146): Worst-case recovery slack is 46.715
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    47.617               0.000 altera_reserved_tck 
-Info (332146): Worst-case removal slack is 0.897
+    Info (332119):    46.715               0.000 altera_reserved_tck 
+Info (332146): Worst-case removal slack is 1.164
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     0.897               0.000 altera_reserved_tck 
-Info (332146): Worst-case minimum pulse width slack is 49.648
+    Info (332119):     1.164               0.000 altera_reserved_tck 
+Info (332146): Worst-case minimum pulse width slack is 49.649
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    49.648               0.000 altera_reserved_tck 
+    Info (332119):    49.649               0.000 altera_reserved_tck 
 Info (332114): Report Metastability: Found 3 synchronizer chains.
     Info (332114): Worst-Case MTBF of Design is 1e+09 years or 3.15e+16 seconds.
     Info (332114): Typical MTBF of Design is 1e+09 years or 3.15e+16 seconds.
@@ -1642,7 +1643,7 @@ Info (332114): Report Metastability: Found 3 synchronizer chains.
     Info (332114): Number of Synchronizer Chains Found: 3
     Info (332114): Shortest Synchronizer Chain: 2 Registers
     Info (332114): Fraction of Chains for which MTBFs Could Not be Calculated: 0.333
-    Info (332114): Worst Case Available Settling Time: 197.405 ns
+    Info (332114): Worst Case Available Settling Time: 197.040 ns
     Info (332114): 
     Info (332114): Worst-Case MTBF values are calculated based on the worst-case silicon characteristics, with worst-case operating conditions.
     Info (332114):   - Under worst-case conditions, an increase of 100ps in available settling time will increase MTBF values by a factor of 1.8
@@ -1652,7 +1653,7 @@ Info: Analyzing Fast 1200mV 0C Model
 Warning (332060): Node: MAX10_CLK1_50 was determined to be a clock but was found without an associated clock assignment.
     Info (13166): Register lab7_2:u0|lab7_2_sdram:sdram|m_addr[0] is being clocked by MAX10_CLK1_50
 Warning (332060): Node: lab7_2:u0|vga_text_avl_interface:vga_text_mode_controller_0|vga_controller:vgaController|clkdiv was determined to be a clock but was found without an associated clock assignment.
-    Info (13166): Register lab7_2:u0|vga_text_avl_interface:vga_text_mode_controller_0|vga_controller:vgaController|vc[3] is being clocked by lab7_2:u0|vga_text_avl_interface:vga_text_mode_controller_0|vga_controller:vgaController|clkdiv
+    Info (13166): Register lab7_2:u0|vga_text_avl_interface:vga_text_mode_controller_0|vga_controller:vgaController|hc[7] is being clocked by lab7_2:u0|vga_text_avl_interface:vga_text_mode_controller_0|vga_controller:vgaController|clkdiv
 Info (332097): The following timing edges are non-unate.  The Timing Analyzer will assume pos-unate behavior for these edges in the clock network.
     Info (332098): Cell: altera_internal_jtag  from: tck  to: tckutap
 Warning (332056): PLL cross checking found inconsistent PLL clock settings:
@@ -1662,22 +1663,22 @@ Critical Warning (332168): The following clock transfers have no clock uncertain
     Critical Warning (332169): From altera_reserved_tck (Rise) to altera_reserved_tck (Rise) (setup and hold)
     Critical Warning (332169): From altera_reserved_tck (Rise) to altera_reserved_tck (Fall) (setup and hold)
     Critical Warning (332169): From altera_reserved_tck (Fall) to altera_reserved_tck (Fall) (setup and hold)
-Info (332146): Worst-case setup slack is 48.381
+Info (332146): Worst-case setup slack is 48.452
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    48.381               0.000 altera_reserved_tck 
+    Info (332119):    48.452               0.000 altera_reserved_tck 
 Info (332146): Worst-case hold slack is 0.147
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
     Info (332119):     0.147               0.000 altera_reserved_tck 
-Info (332146): Worst-case recovery slack is 49.075
+Info (332146): Worst-case recovery slack is 48.551
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    49.075               0.000 altera_reserved_tck 
-Info (332146): Worst-case removal slack is 0.425
+    Info (332119):    48.551               0.000 altera_reserved_tck 
+Info (332146): Worst-case removal slack is 0.543
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     0.425               0.000 altera_reserved_tck 
+    Info (332119):     0.543               0.000 altera_reserved_tck 
 Info (332146): Worst-case minimum pulse width slack is 49.420
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
@@ -1689,7 +1690,7 @@ Info (332114): Report Metastability: Found 3 synchronizer chains.
     Info (332114): Number of Synchronizer Chains Found: 3
     Info (332114): Shortest Synchronizer Chain: 2 Registers
     Info (332114): Fraction of Chains for which MTBFs Could Not be Calculated: 0.333
-    Info (332114): Worst Case Available Settling Time: 198.813 ns
+    Info (332114): Worst Case Available Settling Time: 198.626 ns
     Info (332114): 
     Info (332114): Worst-Case MTBF values are calculated based on the worst-case silicon characteristics, with worst-case operating conditions.
     Info (332114):   - Under worst-case conditions, an increase of 100ps in available settling time will increase MTBF values by a factor of 1.8
@@ -1698,9 +1699,9 @@ Info (332114): Report Metastability: Found 3 synchronizer chains.
 Info (332102): Design is not fully constrained for setup requirements
 Info (332102): Design is not fully constrained for hold requirements
 Info: Quartus Prime Timing Analyzer was successful. 0 errors, 292 warnings
-    Info: Peak virtual memory: 4922 megabytes
-    Info: Processing ended: Sun Nov 14 18:37:57 2021
-    Info: Elapsed time: 00:00:11
-    Info: Total CPU time (on all processors): 00:00:11
+    Info: Peak virtual memory: 4904 megabytes
+    Info: Processing ended: Fri Nov 26 22:50:05 2021
+    Info: Elapsed time: 00:00:25
+    Info: Total CPU time (on all processors): 00:00:28
 
 

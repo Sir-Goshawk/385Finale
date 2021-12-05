@@ -1,0 +1,5 @@
+module timer(
+	input [7:0] clock_reset
+	output [7:0] fps) 
+begin
+end

@@ -14,7 +14,7 @@ IVn = Draw inverse glyph
 CODEn = Glyph code from IBM codepage 437
 
 Control Register Format:
-[[31-25][24-21][20-17][16-13][ 12-9][ 8-5 ][ 4-1 ][   0    ] 
+[[31-25][24-21][20-17][16-13][ 12-9][ 8-5 ][ 4-1 ][   0    ]
 [[RSVD ][FGD_R][FGD_G][FGD_B][BKG_R][BKG_G][BKG_B][RESERVED]
 
 VSYNC signal = bit which flips on every Vsync (time for new frame), used to synchronize software
@@ -29,10 +29,10 @@ module vga_text_avl_interface (
 	// Avalon Clock Input, note this clock is also used for VGA, so this must be 50Mhz
 	// We can put a clock divider here in the future to make this IP more generalizable
 	input logic CLK,
-	
+
 	// Avalon Reset Input
 	input logic RESET,
-	
+
 	// Avalon-MM Slave Signals
 	input  logic AVL_READ,					// Avalon-MM Read
 	input  logic AVL_WRITE,					// Avalon-MM Write
@@ -41,7 +41,7 @@ module vga_text_avl_interface (
 	input  logic [12:0] AVL_ADDR,			// Avalon-MM Address
 	input  logic [31:0] AVL_WRITEDATA,		// Avalon-MM Write Data
 	output logic [31:0] AVL_READDATA,		// Avalon-MM Read Data
-	
+
 	// Exported Conduit (mapped to VGA port - make sure you export in Platform Designer)
 	output logic [3:0]  red, green, blue,	// VGA color channels (mapped to output pins in top-level)
 	output logic hs, vs						// VGA HS/VS
@@ -55,41 +55,40 @@ logic [9:0] DrawX, DrawY;
 logic blank, sync, pixel_clk, inCurrent;
 logic [7:0] fontRomOutput;
 logic [31:0] registerOutput, controlOut;
-logic [6:0] posX, posY, yAdjust, yAccess;
+logic [6:0] posX, posY, yAccess;
 logic [12:0] VRAMAddress;
 //wk 2 variables
 logic [15:0] charCurrent;
-logic [3:0] colorRegB, colorRegF, rBack, gBack, bBack, rFore, gFore, bFore;
+logic [3:0] colorRegB, colorRegF, rBack, gBack, bBack, rFore, gFore, bFore, yAdjust;
 logic [31:0] colorOutB, colorOutF;
 
 //Declare submodules..e.g. VGA controller, ROMS, etc
-vga_controller vgaController(.Clk(CLK),.Reset(RESET),.hs(hs),.vs(vs),.pixel_clk(pixel_clk),.blank(blank),.sync(sync),.DrawX(DrawX),.DrawY(DrawY)); 
+vga_controller vgaController(.Clk(CLK),.Reset(RESET),.hs(hs),.vs(vs),.pixel_clk(pixel_clk),.blank(blank),.sync(sync),.DrawX(DrawX),.DrawY(DrawY));
 
 
 always_comb //access characterss
 begin
 	posX = DrawX[9:3]; //drawX/8
 	posY = DrawY[9:3]; //drawY/8
-	yAdjust = posY;
-	if (posY[0] == 1'b1)
-		yAdjust = posY - 1;
+	yAdjust = DrawY[3:0];
+	//if (DrawY[0] == 1) yAdjust = yAdjust +1; 
 	VRAMAddress = posY*80+posX;	 //wk2
 end
 
-ram accessRAM(.address_a(AVL_ADDR[11:0]), 
+ram accessRAM(.address_a(AVL_ADDR[11:0]),
 .address_b(VRAMAddress[12:1]), //VRAM/2 ever register has 2 chara
-.byteena_a(AVL_BYTE_EN), 
+.byteena_a(AVL_BYTE_EN),
 .clock(CLK),
-.data_a(AVL_WRITEDATA), .data_b(31'b0), 
+.data_a(AVL_WRITEDATA), .data_b(31'b0),
 .rden_a(AVL_READ), .rden_b(1'b1),
-.wren_a(AVL_WRITE), .wren_b(1'b0), 
+.wren_a(AVL_WRITE), .wren_b(1'b0),
 .q_a(AVL_READDATA), .q_b(registerOutput));
 
-always_ff @(posedge CLK) 
+always_ff @(posedge CLK)
 begin
-	if (AVL_CS == 1'b1 && (AVL_ADDR[11] == 1'b1 && AVL_ADDR[10] == 1'b1)) 
+	if (AVL_CS == 1'b1 && (AVL_ADDR[11] == 1'b1 && AVL_ADDR[10] == 1'b1))
 		begin
-			if (AVL_WRITE == 1'b1 && AVL_ADDR >= 4'h3000) 
+			if (AVL_WRITE == 1'b1 && AVL_ADDR >= 4'h3000)
 			begin
 				case (AVL_BYTE_EN)
 					4'b1111 : reg_32[AVL_ADDR[4:0]] <= AVL_WRITEDATA;
@@ -100,9 +99,9 @@ begin
 					4'b0010 : reg_32[AVL_ADDR[4:0]][15:8] <= AVL_WRITEDATA[15:8];
 					4'b0001 : reg_32[AVL_ADDR[4:0]][7:0] <= AVL_WRITEDATA[7:0];
 				endcase
-			end 
+			end
 		end
-		
+
 	colorOutB <= reg_32[colorRegB[3:1]];
 	colorOutF <= reg_32[colorRegF[3:1]];
 end
@@ -119,7 +118,7 @@ begin
 	colorRegF = charCurrent[7:4]; //set forground code
 	if (posY[0] == 1'b1)
 		yAccess = DrawY[3:0] - 1;
-	else 
+	else
 		yAccess = DrawY[3:0];
 end
 
@@ -127,8 +126,8 @@ font_rom fontRom(.addr({charCurrent[14:8],DrawY[3:0]}),.data(fontRomOutput));
 
 
 //handle drawing (may either be combinational or sequential - or both).
- 
-always_ff @(posedge pixel_clk) 
+
+always_ff @(posedge pixel_clk)
 begin
 	if(blank == 1'b0)
 	begin
@@ -166,21 +165,21 @@ begin
 				bFore <= colorOutF[4:1];
 			end
 		endcase
-		
+
 		if (fontRomOutput[7-DrawX[2:0]] != inCurrent)  //wk2\
 		begin
 			red <= rFore;
 			green <= gFore;
 			blue <= bFore;
-		end 
-		else 
+		end
+		else
 		begin
 			red <= rBack;
 			green <= gBack;
 			blue <= bBack;
 		end
 	end
-	
+
 end
 
 

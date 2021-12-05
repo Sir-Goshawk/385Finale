@@ -66,5 +66,6 @@ void textVGAColorScreenSaver(); //Call this for your demo
 void screenVGAinitializer();
 void VGADrawColorBox(int x, int y, alt_u8 background);
 void userControlledBlock(int x, int y, int index, int color);
+void VGAwriteText(int x, int y, int color, char text[]);
 
 #endif /* TEXT_MODE_VGA_COLOR_H_ */

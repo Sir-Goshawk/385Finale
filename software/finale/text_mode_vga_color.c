@@ -91,7 +91,8 @@ void textVGAColorScreenSaver()
 		x = rand() % (ROWS-strlen(color_string));
 		y = rand() % 60;
 		if (y %2==0) {
-			textVGADrawColorText (color_string, 20, y, bg, fg);
+			textVGADrawColorText (color_string, x, y, bg, fg);
+			textVGADrawColorText (color_string, x, y+1, bg, fg);
 
 		}
 		usleep (100000);
@@ -104,6 +105,11 @@ void textVGAColorScreenSaver()
 void VGADrawColorBox(int x, int y, alt_u8 background)
 {
 	vga_ctrl->VRAM[(y*COLUMNS + x) * 2] = 0 << 4 | background;
+}
+
+void VGAwriteText(int x, int y, int color, char text[]) {
+		textVGADrawColorText (text, x, y, 0, color);
+		textVGADrawColorText (text, x, y+1, 0, color);
 }
 
 void userControlledBlock(int x, int y, int index, int color) {
