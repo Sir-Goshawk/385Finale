@@ -194,7 +194,7 @@ void MAX3421E_init(void) {
 /* MAX3421 state change task and interrupt handler */
 void MAX3421E_Task(void) {
 	if ( IORD_ALTERA_AVALON_PIO_DATA(USB_IRQ_BASE) == 0) {
-		//printf("MAX interrupt\n\r");
+		printf("MAX interrupt\n\r");
 		MaxIntHandler();
 	}
 	if ( IORD_ALTERA_AVALON_PIO_DATA(USB_GPX_BASE) == 1) {
@@ -207,7 +207,7 @@ void MaxIntHandler(void) {
 	BYTE HIRQ;
 	BYTE HIRQ_sendback = 0x00;
 	HIRQ = MAXreg_rd( rHIRQ);                  //determine interrupt source
-	//printf("IRQ: %x\n", HIRQ);
+	printf("IRQ: %x\n", HIRQ);
 	if (HIRQ & bmFRAMEIRQ) {                   //->1ms SOF interrupt handler
 		HIRQ_sendback |= bmFRAMEIRQ;
 	}                   //end FRAMEIRQ handling

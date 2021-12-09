@@ -21,6 +21,6 @@ int main() {
 	}
 
 
-	keyInput(20,4,1,10,20);
+	keyInput(12,4,1,10,20);
 	return 1;
 }

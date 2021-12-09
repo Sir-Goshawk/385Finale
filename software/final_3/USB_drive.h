@@ -131,4 +131,9 @@ void TetrisClearLine(TetrisGameState* givenState, int l);
 void TetrisCheckLineComplete(TetrisGameState* givenState);
 void TetrisInputLeft(TetrisGameState* givenState);
 void TetrisInputRight(TetrisGameState* givenState);
-void TetrisShowScore(TetrisGameState* givenState);
+void TetrisShowScore(int x, int y);
+void TetrisPause(TetrisGameState* givenState);
+TetrisGameState TetrisPopulate(int x, int y, int boardcolor, int width, int height);
+void gameMenu();
+void moveMenu();
+void clearMenu()

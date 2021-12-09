@@ -89,18 +89,17 @@ typedef struct
     int pause;
     int gameX;
     int gameY;
+    int boardColor;
 } TetrisGameState;
 
-int boardColor = 1;
-int nextBlock = 0, nextColor;
+int boardColor;
+int nextBlock, nextColor;
 const int tetrisBlockCount = sizeof(tetrisBlocks) / sizeof(TetrisBlock);
-int colorValues[80][60];
-int level = 2;
-int score;
+int players = 0;
+int arrowPos = 25;
 alt_u8* timer = 0x00000040;
 alt_u8* reset = 0x00000030;
-time_t t;
-time_t rawTime;
+
 
 void TetrisInitialize(TetrisGameState* givenState, int width, int height, int givenX, int givenY) {
     int x, y;
@@ -110,27 +109,25 @@ void TetrisInitialize(TetrisGameState* givenState, int width, int height, int gi
     givenState->boardHeight = (height+4);
     givenState->gameX = givenX;
     givenState->gameY = givenY;
-    givenState->board = (int**)calloc(width,sizeof(int*));
+    givenState->board = (int**)malloc(sizeof(int*) * width);
 
     for (x = 0; x < givenState->boardWidth; x++) {
-        givenState->board[x] = (int*)calloc(givenState->boardHeight,sizeof(int));
+        givenState->board[x] = (int*)malloc(sizeof(int) * givenState->boardHeight);
         for (y = 0; y < givenState->boardHeight; y++) {
-            givenState->board[x][y] = boardColor;
+            givenState->board[x][y] = givenState->boardColor;
         }
     }
-    //TetrisCleanup(givenState);
     TetrisPrintBoard(givenState);
 
     givenState->pause = 0;
 }
 
 void TetrisCleanup(TetrisGameState* givenState) {
-    int x, y;
-    for (x = 0; x < givenState->boardWidth; x++) {
-        //free(givenState->board[x]);
-    	for (y = 0; y < givenState->boardHeight; y++) {
-    		givenState->board[x][y] = boardColor;
+    for (int x = 0; x < givenState->boardWidth; x++) {
+    	for (int y = 0; y < givenState->boardHeight; y++) {
+    		givenState->board[x][y] = givenState->boardColor;
     	}
+        //free(givenState->board[x]);
     }
     //free(givenState->board);
 }
@@ -151,7 +148,7 @@ int TetrisCheckCollision(TetrisGameState* givenState) {
             if (activeBlock.data[y][x] != ' ') {
                 if ((Y >= givenState->boardHeight) ||
                     (X >= 0 && X < givenState->boardWidth && Y >= 3 &&
-						givenState->board[X][Y] != boardColor)) {
+						givenState->board[X][Y] != givenState->boardColor)) {
                     return 1;
                 }
             }
@@ -170,31 +167,26 @@ void TetrisCreateBlock(TetrisGameState* givenState) {
     givenState->activeBlockY = 4-givenState->activeBlock.height;
 
     givenState->activeBlock.color = nextColor; //current block's color
-
-    //nextBlock = srand((unsigned) time(&t)) % tetrisBlockCount; //next block's color
-  	nextBlock = 0;
-    int color = (srand((unsigned) time(&t)) % 15)+1;
-    if (color == boardColor || color == nextColor) color = (srand((unsigned) time(&t)) % 15)+1;
+    nextBlock = rand() % tetrisBlockCount; //next block's color
+  	//nextBlock = 0;
+    int color = (rand() % 15)+1;
+    if (color == givenState->boardColor || color == nextColor) color = (rand() % 15)+1;
     nextColor = color; //next color
-  	for (int i = 0; i < srand((unsigned) time(&t)) % 3; i++) {
+  	for (int i = 0; i < rand() % 3; i++) {
   		TetrisRotateBlock(givenState); //roate block
   	}
   	TetrisBlock previewBlock = tetrisBlocks[nextBlock]; //preview next block
-  	/*for (int x = 0; x < 5; x++) {
-  		//for (int y = 0; y < 5; y++) {
-			if ((x < previewBlock.width &&  y < previewBlock.height) && previewBlock.data[y][x] != ' ') 	VGADrawColorBox(x+givenState->gameX-6, y+givenState->gameY, color);
-			else VGADrawColorBox(x+givenState->gameX-6, y+givenState->gameY, boardColor);*/
 	for (int x = 0; x < 9; x++) {
 		for (int y = 0; y < 9; y++) {
-			if ((x < previewBlock.width &&  y < previewBlock.height) && previewBlock.data[y][x] != ' ') 	VGADrawColorBox(x+givenState->gameX-10, y+givenState->gameY, color);
-			else VGADrawColorBox(x+givenState->gameX-10, y+givenState->gameY, boardColor);
+			if ((x < previewBlock.width &&  y < previewBlock.height) && previewBlock.data[y/2][x/2] != ' ') 	VGADrawColorBox(x+givenState->gameX-10, y+givenState->gameY, color);
+			else VGADrawColorBox(x+givenState->gameX-10, y+givenState->gameY, givenState->boardColor);
   		}
   	}
 
     if (TetrisCheckCollision(givenState)) {
         givenState->dead = 1;
-		printf("end game");
-		VGAwriteText(givenState->gameX+(givenState->boardWidth)/2-(strlen("GAME OVER")/2),(givenState->gameY+(givenState->boardHeight)/2),0,2,"GAME OVER");
+		printf("[%d,%d] end game",givenState->gameX,givenState->gameY);
+		VGAwriteText(givenState->gameX-(strlen("GAME OVER")),(givenState->gameY+4+(givenState->boardHeight)),2,0,"GAME OVER");
     }
 }
 
@@ -206,9 +198,7 @@ void TetrisPrintBlock(TetrisGameState* givenState) {
     for (x = 0; x < activeBlock.width; x++) {
         for (y = 0; y < activeBlock.height; y++) {
             if (activeBlock.data[y][x] != ' ') {
-				givenState->board[givenState->activeBlockX + x][givenState->activeBlockY + y] =
-					//b.data[y][x];
-					activeBlock.color;
+				givenState->board[givenState->activeBlockX + x][givenState->activeBlockY + y] = activeBlock.color;
             }
         }
     }
@@ -263,7 +253,7 @@ void TetrisClearLine(TetrisGameState* givenState, int l) {
     }
 
     for (x = 0; x < givenState->boardWidth; x++) {
-        givenState->board[x][0] = boardColor;
+        givenState->board[x][0] = givenState->boardColor;
     }
 }
 
@@ -274,7 +264,7 @@ void TetrisCheckLineComplete(TetrisGameState* givenState) {
         l = 1;
 
         for (x = 0; x < givenState->boardWidth && l; x++) {
-            if (givenState->board[x][y] == boardColor) {
+            if (givenState->board[x][y] == givenState->boardColor) {
                 l = 0;
             }
         }
@@ -282,8 +272,12 @@ void TetrisCheckLineComplete(TetrisGameState* givenState) {
         if (l) {
             ++(givenState->completedLines);
             TetrisClearLine(givenState, y);
-            score+=level/2*100;
-            printf("%d line(s) completed at %d score %d\n", givenState->completedLines, y, score);
+            int holder = (givenState->completedLines);
+            holder = holder*100;
+            printf("%d line(s) completed at %d\n", givenState->completedLines, holder);
+            char showScore;
+        	sprintf(showScore, "%d", holder);
+            VGAwriteText(givenState->gameX-10, givenState->gameY+12, 14, givenState->boardColor, showScore);
             y++;
         }
     }
@@ -291,52 +285,58 @@ void TetrisCheckLineComplete(TetrisGameState* givenState) {
 
 void TetrisInputLeft(TetrisGameState* givenState) {
     --givenState->activeBlockX;
-
     if (TetrisCheckCollision(givenState)) ++givenState->activeBlockX;
 }
 
 void TetrisInputRight(TetrisGameState* givenState) {
     ++givenState->activeBlockX;
-
     if (TetrisCheckCollision(givenState)) --givenState->activeBlockX;
 }
 
-
 void TetrisPrintBoard(TetrisGameState* givenState) {
     int x, y;
-
-    for (y = 4; y < givenState->boardHeight; y++) {
-        for (x = 0; x < givenState->boardWidth; x++) {
-            if (x >= givenState->activeBlockX &&                              //
-                y >= givenState->activeBlockY &&                              //
-                x < (givenState->activeBlockX + givenState->activeBlock.width) &&  //
-                y < (givenState->activeBlockY + givenState->activeBlock.height) && //
-                givenState->activeBlock.data[y - givenState->activeBlockY]
-                                       [x - givenState->activeBlockX] != ' ') {
-            	VGADrawColorBox(givenState->gameX+x,givenState->gameY-4+y, givenState->activeBlock.color);
-            } else {
-            	VGADrawColorBox(givenState->gameX+x,givenState->gameY-4+y,givenState->board[x][y]);
-                //if (givenState->board[x][y] != boardColor && givenState->board[x][y] != givenState->activeBlock.color) printf("(%d,%d) %d ; ",x,y,givenState->board[x][y]);
-            }
-        }
-    }
+    //printf("drawing start (%d, %d)", givenState->gameX, givenState->gameY);
+	if (givenState->pause) {
+		VGAwriteText(givenState->gameX-(strlen("PAUSE GAME")),(givenState->gameY+(givenState->boardHeight)),0,2,"PAUSE GAME");
+	} else {
+		VGAwriteText(givenState->gameX-(strlen("PAUSE GAME")),(givenState->gameY+(givenState->boardHeight)),0,0,"PAUSE GAME");
+		for (y = 4; y < (givenState->boardHeight)*2; y++) {
+			for (x = 0; x < (givenState->boardWidth)*2; x++) {
+				if (x/2 >= givenState->activeBlockX &&                              //
+					y/2 >= givenState->activeBlockY &&                              //
+					x/2 < (givenState->activeBlockX + givenState->activeBlock.width) &&  //
+					y/2 < (givenState->activeBlockY + givenState->activeBlock.height) && //
+					givenState->activeBlock.data[y/2 - givenState->activeBlockY]
+										   [x/2 - givenState->activeBlockX] != ' ') {
+					VGADrawColorBox(givenState->gameX+x,givenState->gameY-4+y, givenState->activeBlock.color);
+				} else {
+					VGADrawColorBox(givenState->gameX+x,givenState->gameY-4+y,givenState->board[x/2][y/2]);}
+			}
+		}
+		/*for (y = 4; y < (givenState->boardHeight); y++) {
+			for (x = 0; x < (givenState->boardWidth); x++) {
+				if (x >= givenState->activeBlockX &&                              //
+					y >= givenState->activeBlockY &&                              //
+					x < (givenState->activeBlockX + givenState->activeBlock.width) &&  //
+					y < (givenState->activeBlockY + givenState->activeBlock.height) && //
+					givenState->activeBlock.data[y - givenState->activeBlockY]
+										   [x - givenState->activeBlockX] != ' ') {
+					VGADrawColorBox(givenState->gameX+x,givenState->gameY-4+y, givenState->activeBlock.color);
+				} else {
+					VGADrawColorBox(givenState->gameX+x,givenState->gameY-4+y,givenState->board[x][y]);}
+			}
+		}*/
+	}
 }
 
-void TetrisShowScore(TetrisGameState* givenState) {
-    int x, y;
-    char showScore;
-
-    for (y = 0; y > 7; y++) {
-        for (x = 0; x < 9; x++) {
-        	VGADrawColorBox(x+givenState->gameX-10, y+givenState->gameY, boardColor);
-        }
-    }
-    VGAwriteText(givenState->gameX-10, givenState->gameY+10, 14, boardColor, "SCORE:");
-	sprintf(showScore, "%d", score);
-    VGAwriteText(givenState->gameX-10, givenState->gameY+12, 14, boardColor, showScore);
-
+void TetrisShowScore(int x, int y) {
+    //char showScore;
+	//sprintf(showScore, "%d", score);
 }
 
+void TetrisPause(TetrisGameState* givenState) {
+	givenState->pause = !givenState->pause;
+}
 
 extern HID_DEVICE hid_device;
 
@@ -450,19 +450,58 @@ void printSignedHex1(signed char value) {
 void setKeycode(WORD keycode) {
 	IOWR_ALTERA_AVALON_PIO_DATA(0x00000160, keycode);
 }
-
-
-void keyInput(int x, int y, int boardcolor, int width, int height) {
+TetrisGameState TetrisPopulate(int x, int y, int boardcolor, int width, int height) {
 	TetrisGameState state; //new game
-	boardColor = boardcolor; //set board color
-	nextBlock = 0;
-	//nextBlock = srand((unsigned) time(&t)) % tetrisBlockCount; //intize first block
-	int color = (srand((unsigned) time(&t)) % 15)+1;
-	if (color == boardColor || color == nextColor) color = (srand((unsigned) time(&t)) % 15)+1;
+	state.boardColor = boardcolor; //set board color
+	//nextBlock = 0;
+	nextBlock = rand() % tetrisBlockCount; //intize first block
+	int color = (rand() % 15)+1;
+	if (color == boardcolor || color == nextColor) color = (rand() % 15)+1;
 	nextColor = color; //initize first color
 	TetrisInitialize(&state, width, height, x, y);
 	TetrisCreateBlock(&state);
-	VGAwriteText(x+width/2-(strlen("TETRIS")/2),y-2,2,0,"TETRIS");
+	VGAwriteText(x+width-(strlen("TETRIS")/2),y-2,2,0,"TETRIS");
+    for (int i = 0; i < 9; i++) {
+    	for (int j = 0; j < 6; j++) {
+    		VGADrawColorBox(x-10+i,y+10+j,boardcolor);
+    	}
+    }
+    VGAwriteText(x-10, y+10, 14, boardcolor, "SCORE:");
+    VGAwriteText(x-10, y+12, 14, boardcolor, "0");
+    return state;
+}
+
+void gameMenu() {
+	for (int i = 0; i < 12; i++) {
+		for (int j = 0; j < 4; j++) {
+    		VGADrawColorBox(33+i,24+j,1);
+		}
+	}
+    VGAwriteText(34, 25, 14, 1, "1 PLAYER");
+    VGAwriteText(34, 27, 14, 1, "2 PLAYERS");
+}
+
+void moveMenu() {
+	if (arrowPos == 25) VGAwriteText(34, arrowPos, 14, 1, ">");
+	else {
+		VGAwriteText(34, 27, 14, 1, ">");
+		arrowPos = 27;
+	}
+}
+
+void clearMenu() {
+	for (int i = 0; i < 10; i++) {
+		for (int j = 0; j < 4; j++) {
+    		VGADrawColorBox(32+i,24+j,0);
+		}
+	}
+}
+
+void keyInput(int x, int y, int boardcolor, int width, int height) {
+	srand(time(NULL));
+	gameMenu();
+	TetrisGameState state = TetrisPopulate(x, y, boardcolor,width, height);
+
 
 	BYTE rcode;
 	BOOT_MOUSE_REPORT buf;		//USB mouse report
@@ -477,9 +516,10 @@ void keyInput(int x, int y, int boardcolor, int width, int height) {
 	MAX3421E_init();
 	printf("initializing USB...\n");
 	USB_init();
-	while (1) {
-		t = time(NULL);
 
+	long counter;
+	while (1) {
+		srand(time(NULL));
 		//printf(".");
 		MAX3421E_Task();
 		USB_Task();
@@ -499,48 +539,52 @@ void keyInput(int x, int y, int boardcolor, int width, int height) {
 					printf("%x \n", rcode);
 					continue;
 				}
+			  if(!state.dead) {
 
-      if(!state.dead) {
-          //TetrisPrintBoard(&state);
-      		//paintScreen();
-    		if (timer != 0 && !state.pause) {
-    			TetrisFallBlocks(&state);
-    			//printf("f");
-    			reset = 1;
-    			reset = 0;
-    		}
-    		TetrisPrintBoard(&state);
-    		TetrisCheckLineComplete(&state);
-    		TetrisShowScore(&state);
-  				//printf("keycodes: ");
-  				for (int i = 0; i < 6; i++) {
-  					if (kbdbuf.keycode[i] != 0) {
-  						//printf("%x - ", kbdbuf.keycode[i]);
-  						if (kbdbuf.keycode[i] == 26 || kbdbuf.keycode[i] == 82) { //W
-  							//printf("W - ");
-  			                TetrisRotateBlock(&state);
-  						} else if (kbdbuf.keycode[i] == 4 || kbdbuf.keycode[i] == 80) { //A
-  							//printf("A - ");
-  			                TetrisInputLeft(&state);
-  						} else if (kbdbuf.keycode[i] == 22 || kbdbuf.keycode[i] == 81) { //S
-  							//printf("S - ");
-  			                TetrisFallBlocks(&state);
-  						} else if (kbdbuf.keycode[i] == 7 || kbdbuf.keycode[i] == 79) { //D
-  							//printf("D - ");
-  			                TetrisInputRight(&state);
-  						} else if (kbdbuf.keycode[i] == 41) { //esc
-						    state.pause = !state.pause;
-  							//printf("pause game \n");
-  						} else if (kbdbuf.keycode[i] == 40) { //enter
-							//printf("%d \n", t);
-  						}
-  					}
-  				}
-  				printf("g");
-			}
-			printf("a");
-
-
+				  if (timer != 0 && !state.pause) {
+						TetrisFallBlocks(&state);
+						//printf("%ul \n",time(NULL));
+						reset = 1;
+						reset = 0;
+				  }
+					TetrisPrintBoard(&state);
+					TetrisCheckLineComplete(&state);
+				}
+				//printf("a");
+				for (int i = 0; i < 6; i++) {
+					if (kbdbuf.keycode[i] != 0) {
+						//printf("%x - ", kbdbuf.keycode[i]);
+						if (kbdbuf.keycode[i] == 26 || kbdbuf.keycode[i] == 82) { //W
+							//printf("W - ");
+							TetrisRotateBlock(&state);
+						} else if (kbdbuf.keycode[i] == 4 || kbdbuf.keycode[i] == 80) { //A
+							//printf("A - ");
+							TetrisInputLeft(&state);
+						} else if (kbdbuf.keycode[i] == 22 || kbdbuf.keycode[i] == 81) { //S
+							//printf("S - ");
+							TetrisFallBlocks(&state);
+						} else if (kbdbuf.keycode[i] == 7 || kbdbuf.keycode[i] == 79) { //D
+							//printf("D - ");
+							TetrisInputRight(&state);
+						} else if (kbdbuf.keycode[i] == 41) { //esc
+							TetrisPause(&state);
+							//printf("pause game \n");
+						} else if (kbdbuf.keycode[i] == 40) { //enter
+							if (state.dead) {
+								TetrisCleanup(&state);
+								state.dead = 0;
+								VGAwriteText(x-(strlen("GAME OVER")),(y+8+(height)),0,0,"GAME OVER");
+								printf("(%d,%d) \n",x,y );
+							}
+							if (players == 0) {
+								if (arrowPos == 25) {
+									//TetrisGameState state = TetrisPopulate(x, y, boardcolor,width, height);
+									clearMenu();
+								}
+							}
+						}
+					}
+				}
 				setKeycode(kbdbuf.keycode[0]);
 				printSignedHex0(kbdbuf.keycode[0]);
 				printSignedHex1(kbdbuf.keycode[1]);
@@ -554,8 +598,8 @@ void keyInput(int x, int y, int boardcolor, int width, int height) {
 			}
 		} else { //not in USB running state
 
-			//printf("USB task state: ");
-			//printf("%x\n", GetUsbTaskState());
+			printf("USB task state: ");
+			printf("%x\n", GetUsbTaskState());
 			if (runningdebugflag) {	//previously running, reset USB hardware just to clear out any funky state, HS/FS etc
 				runningdebugflag = 0;
 				MAX3421E_init();
